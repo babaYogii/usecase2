@@ -24,7 +24,10 @@ const theme=createTheme({
             main:amber[500],
             light:amber[300],
             dark:amber[700]
-          }
+          },
+          text: {
+            primary: '#000000',
+          },
     },
     components:{
         MuiTextField:{
@@ -51,6 +54,13 @@ const theme=createTheme({
           defaultProps: {
             fontSize: "medium",
             color: "tertiary", // Set the default color for all SVG icons
+          },
+        },
+        MuiCardContent: {
+          styleOverrides: {
+            root: {
+              color: '#000000', // Set the desired text color, such as black (#000000)
+            },
           },
         },
 

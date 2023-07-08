@@ -102,6 +102,16 @@ const Signup = () => {
     const [errorState, setErrorState] = React.useState(false);
 
 
+    React.useEffect(()=>{
+
+        let a=localStorage.getItem('token')
+        
+         if(a){
+           navigate('/dashboard')
+            }
+        }
+    )
+
     const handelChange = (e) => {
         setUserData({
             ...userData,

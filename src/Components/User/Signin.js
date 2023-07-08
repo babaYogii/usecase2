@@ -1,11 +1,12 @@
 import React from 'react';
-import {  Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery } from '@mui/material';
+import { Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { AccountCircle, Https } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
+import { signin } from '../../api/userApi';
 
 const useStyles = makeStyles((theme) => ({
- 
+
   paper: {
     mt: 20,
     display: "flex",
@@ -13,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     paddingY: theme.spacing(4),
     height: '80vh',
-     position: 'relative',
-    borderRadius:'5%',
+    position: 'relative',
+    borderRadius: '5%',
     [theme.breakpoints.down('sm')]: {
       width: '100%', // Set full width for smaller devices
-      height:'100%',
-      borderRadius:'0px'
+      height: '100%',
+      borderRadius: '0px'
     },
-    
+
   },
   title: {
     marginBottom: theme.spacing(3),
@@ -29,25 +30,50 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems:'center',
+    alignItems: 'center',
     gap: theme.spacing(3),
   },
 }));
 
 const Signin = () => {
   const classes = useStyles();
-  const [user,setUser]=React.useState({});
+  const [user, setUser] = React.useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  React.useEffect(()=>{
+
+   let a=localStorage.getItem('token')
+    if(a){
+      navigate('/dashboard')
+       }
+  
+   
+},[navigate])
 
 
-  const handelChange=(e)=>{
-      setUser({...user,[e.target.name]:e.target.value})
+  const handelChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle login logic
+    try {
+      let response = await signin(user);
+      localStorage.setItem('role', JSON.stringify(response.data.user.role));
+    
+      localStorage.setItem('token', response.data.token);
+     
+      alert("Success")
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error)
+      if (error.status===400) {
+        alert(error.response.data.message);
+      } else {
+        alert(error.response.data.message)
+      }
+
+    }
     console.log(user)
   };
 
@@ -56,8 +82,8 @@ const Signin = () => {
       display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-  }} >
-      <Paper className={classes.paper} sx={{borderRadius: isSmallScreen ? '0' : '5%',}}>
+    }} >
+      <Paper className={classes.paper} elevation={3} sx={{ borderRadius: isSmallScreen ? '0' : '5%', }}>
 
         <Box flex={1.7} padding={2} width='80%'>
 
@@ -73,13 +99,13 @@ const Signin = () => {
                 startAdornment: (
                   <InputAdornment position="start" margin='0' padding='0'>
                     <IconButton disableRipple>
-                      <AccountCircle fontSize="small"  />
+                      <AccountCircle fontSize="small" />
                     </IconButton>
                   </InputAdornment>
                 ),
-                sx:{minWidth:'3.5%'}
+                sx: { minWidth: '3.5%' }
               }}
-               
+
             />
             <TextField
               type="password"
@@ -91,36 +117,36 @@ const Signin = () => {
                 startAdornment: (
                   <InputAdornment position="start">
                     <IconButton disableRipple>
-                      <Https fontSize="small"  />
+                      <Https fontSize="small" />
                     </IconButton>
                   </InputAdornment>
                 ),
-                sx:{minWidth:'3.5%'}
+                sx: { minWidth: '3.5%' }
               }}
             />
 
-            <Button variant="contained" color="primary"  type="submit" sx={{ width: '35%' ,mb:0 }} disableTouchRipple disableFocusRipple>
+            <Button variant="contained" color="primary" type="submit" sx={{ width: '35%', mb: 0 }} disableTouchRipple disableFocusRipple>
               Sign In
             </Button>
             {isSmallScreen ?
-             <Box fontSize={12}>
-                <span>Already have an account? <Link to="/signup" style={{textDecoration:'none'}}>Sign Up</Link></span>
-             </Box>:""  
-          }
+              <Box fontSize={12}>
+                <span>Already have an account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></span>
+              </Box> : ""
+            }
           </form>
         </Box>
         <Hidden mdDown>
 
-          <Box flex={1} sx={{backgroundColor:'#C38154',borderRadius:'0px 20px 20px 0px' ,width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <Box flex={1} sx={{ backgroundColor: '#C38154', borderRadius: '0px 20px 20px 0px', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Box width={200} display='flex' gap={3.2} flexDirection='column'>
 
-            <Typography variant='h4' component='h1' fontWeight='600' align='center'color='whiteSmoke'>New Here?</Typography>
-            <Typography align='center' fontSize='14px' color='whiteSmoke'>Sign up and discover a great amount of new opportunities </Typography>
-            <Button variant="contained" color="primary" type="submit" disableTouchRipple disableFocusRipple onClick={()=>{navigate('/signup')}}>
-              Sign Up
-            </Button>
+              <Typography variant='h4' component='h1' fontWeight='600' align='center' color='whiteSmoke'>New Here?</Typography>
+              <Typography align='center' fontSize='14px' color='whiteSmoke'>Sign up and discover a great amount of new opportunities </Typography>
+              <Button variant="contained" color="primary" type="submit" disableTouchRipple disableFocusRipple onClick={() => { navigate('/signup') }}>
+                Sign Up
+              </Button>
             </Box>
-            
+
           </Box>
         </Hidden>
       </Paper>

@@ -7,6 +7,7 @@ import Signin from './Components/User/Signin';
 import ProtectedRoute from './ProtectedRoutes';
 import DashboardHome from './Components/Dashboard/DashboardHome';
 import './App.css'
+import UploadFile from './Components/UploadFile';
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       <ThemeProvider theme={theme}>
           <Routes >
             <Route element={<ProtectedRoute/>}>
-              <Route path="/" element={<DashboardHome/>} />
-
+              <Route path="/dashboard" element={<DashboardHome/>} />
+              <Route path="/upload" element={<UploadFile/>}/>
             </Route>
               <Route path="/signup" element={<Signup/>} />
               <Route path="/signin" element={<Signin/>} />

@@ -28,7 +28,11 @@ const userSchema=new mongoose.Schema({
         trim:true
     },confirmPassword:{
         type:String,
-    },
+    }, role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
+      }
     
 },{timestamps:true});
 

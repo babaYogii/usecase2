@@ -12,7 +12,7 @@ function Dashboard() {
   return (
     <Box sx={{display:'flex'}}>
       <Sidebar flex={1} setBirthday={setBirthday} birthday={birthday}/>
-      <MainComponent flex={3} setBirthday={setBirthday} birthday={birthday}/>
+      <MainComponent flex={4} setBirthday={setBirthday} birthday={birthday}/>
     </Box>
   );
 }
