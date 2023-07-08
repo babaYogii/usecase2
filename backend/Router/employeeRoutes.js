@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUpcomingBirthdays } = require('../Controller/employeeControlller');
+const { getUpcomingBirthdays, getUpcomingAnniversary } = require('../Controller/employeeControlller');
 const router = express.Router();
 // const employeeController = require('../Controller/employeeControlller');
 
@@ -7,6 +7,6 @@ const router = express.Router();
 router.get('/birthdays/:days', getUpcomingBirthdays);
 
 // Work anniversaries routes
-// router.get('/anniversaries/:days', getUpcomingAnniversaries);
+router.get('/anniversaries/:days', getUpcomingAnniversary);
 
 module.exports = router;

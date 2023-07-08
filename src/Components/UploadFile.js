@@ -40,10 +40,11 @@ const UploadFile = () => {
                 .then(response => {
                     // Handle response from the server
                     alert('File uploaded successfully')
+                    navigate('/dashboard');
                     console.log('File uploaded successfully');
                 })
                 .catch(error => {
-                    // Handle error
+                    
                     alert('File contains incomplete Data')
                     console.error('Error uploading file:', error);
                 });
@@ -69,7 +70,7 @@ const UploadFile = () => {
                     error={!!error}
                     helperText={error}
                     />
-                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                <Button variant="contained" type='submit' color="primary" onClick={handleSubmit}>
                     Submit
                 </Button>
                     </Stack>

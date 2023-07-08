@@ -27,6 +27,15 @@ const theme=createTheme({
           },
           text: {
             primary: '#000000',
+          },MuiTypography: {
+            styleOverrides: {
+              root: {
+                fontFamily: "'Rubik', sans-serif", // Change the font-family here
+              },
+            },
+          },
+          typography: {
+            fontFamily: 'Rubik, sans-serif',
           },
     },
     components:{

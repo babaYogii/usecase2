@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoutes';
 import DashboardHome from './Components/Dashboard/DashboardHome';
 import './App.css'
 import UploadFile from './Components/UploadFile';
+import Landingpage from './Components/Landingpage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/dashboard" element={<DashboardHome/>} />
               <Route path="/upload" element={<UploadFile/>}/>
             </Route>
+            <Route path="/" element={<Landingpage/>}/>
               <Route path="/signup" element={<Signup/>} />
               <Route path="/signin" element={<Signin/>} />
           </Routes>
