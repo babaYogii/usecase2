@@ -44,7 +44,7 @@ const Signin = () => {
 
    let a=localStorage.getItem('token')
     if(a){
-      navigate('/dashboard')
+      navigate('/')
        }
   
    
@@ -64,7 +64,7 @@ const Signin = () => {
       localStorage.setItem('token', response.data.token);
      
       alert("Success")
-      navigate('/dashboard')
+      navigate('/')
     } catch (error) {
       console.log(error)
       if (error.status===400) {

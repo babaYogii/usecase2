@@ -1,24 +1,45 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 import { keyframes,styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const fadeInAnimation = keyframes`
-  from {
-    opacity: 0.2;
+  10% {
+    opacity: 0;
+    
   }
-  to {
-    opacity: 1;
+  30% {
+    opacity: 0.4;
+  
+  }
+  50%{
+    opacity: 0.6;
+    
+  }
+  70%{
+    opacity:0.8
+   
+  }
+  100%{
+    opacity:1
   }
 `;
 
 
 const AnimatedTypography = styled(Typography)`
-  animation: ${fadeInAnimation} 2s ease-in;
+  animation: ${fadeInAnimation} 4s ease-in;
 `;
 
 const LandingPage = () => {
+ 
+    const navigate=useNavigate();
+
+    const handleClick = () => {
+        navigate('/dashboard');
+      };
+
     return (
         <Box
             sx={{
@@ -86,6 +107,12 @@ const LandingPage = () => {
                 </Typography>
                 to make them feel special.
             </Typography>
+            <Box >
+
+            <Button size='30px' variant='contained' onClick={handleClick}>
+                View Events
+            </Button>
+            </Box>
         </Box>
     );
 };

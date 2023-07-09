@@ -135,7 +135,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
 
       <Divider />
       <List >
-        <Typography align='center' gutterBottom> <EmojiEventsIcon /> Anniversary's </Typography>
+        <Typography align='center' gutterBottom> <EmojiEventsIcon />Work Anniversary's </Typography>
         {menuItems.map((menuItem, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton
@@ -170,33 +170,34 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
         <Divider />
       </> : ""
       }
+      {/* <MenuSideBar/> */}
     </div>
   );
 
   return (
     <div >
-      <AppBar sx={{ backgroundColor: 'white', height: "70.2px" }}>
-
-
-
-        <Toolbar >
+     
           {isSmallScreen && (
+             <AppBar sx={{ backgroundColor: 'black', height: "70.2px" }}>
+    
+
+
+             <Toolbar >
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2 }}
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
             >
               <Menu />
             </IconButton>
-          )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MyApp
-          </Typography>   
-          
-        </Toolbar>
+            </Toolbar>
       </AppBar>
+          )}
+          
+       
+         
       <Hidden smDown>
         <Drawer
           variant="permanent"

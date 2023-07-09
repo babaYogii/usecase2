@@ -59,8 +59,8 @@ const UploadFile = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
             <Typography></Typography>
             <Paper sx={{padding:5}} elevation={3}>
-                <Typography variant="h4" component='h1'>Upload File</Typography>
-                <Stack gap={5}>
+                <Typography variant="h4" component='h1' sx={{color:'tertiary.main'}}>Upload File</Typography>
+                <Stack gap={5} sx={{p:8}}>
                 <TextField
                     
                     id="file-upload"

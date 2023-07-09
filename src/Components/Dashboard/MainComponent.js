@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent,  Divider, Typography } from '@mui/material';
+import { Box, Card, CardContent,  Divider, IconButton, Typography } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const MainComponent = ({ birthday,anniversary }) => {
   const [sortedBirthdays, setSortedBirthdays] = useState([]);
   const [sortedanniversary, setSortedanniversary] = useState([]);
   console.log(sortedBirthdays)
+  const navigate=useNavigate();
 
 
 
@@ -49,10 +52,20 @@ const MainComponent = ({ birthday,anniversary }) => {
     setSortedanniversary(sortedArrayforAnniversary)
   }, [birthday,anniversary]);
 
+
+  const handelLogout=()=>{
+    localStorage.clear();
+    navigate('/signin');
+    
+  }
+
   return (
     <div>
       <Box sx={{ position: 'absolute', top: 70, width: '86.5%' }}>
         <Box sx={{ height: '20px', padding: 2 }}>
+        <IconButton sx={{ position: 'absolute', right: 30, top: -50 }} onClick={handelLogout}>
+            <LogoutIcon sx={{mx:1}}/>Logout
+          </IconButton>
           <Typography variant='h6' position='absolute'>
             {("Birthdays").toUpperCase()}
           </Typography>
@@ -90,7 +103,7 @@ const MainComponent = ({ birthday,anniversary }) => {
                   </Card>
                 );
               }) :
-              <Typography variant='h3' sx={{ width:'100%' }} align='center'>"No-upcoming Birthdays "</Typography>
+              <Typography variant='h3' sx={{ width:'100%' }} align='center'>" No-upcoming Birthdays "</Typography>
 
             }
           </Box>
@@ -117,7 +130,9 @@ const MainComponent = ({ birthday,anniversary }) => {
                   </CardContent>
                 </Card>
               );
-            }):"No upcoming anniversary"}
+            }):
+            <Typography variant='h3' sx={{ width:'100%' }} align='center'>" No-upcoming work Anniversary "</Typography>
+}
           </Box>
         </Box>
       </Box>
