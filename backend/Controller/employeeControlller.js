@@ -26,7 +26,7 @@ exports.uploadXLsxFile = async (req, res) => {
       const hasAllColumns = requiredColumns.every((column) => fileColumns.includes(column));
       if (!hasAllColumns) {
         return res.status(400).json({message:"Wrong file does not contain all data"})
-        // throw new Error('File does not contain all the required columns');
+     
       }
       
     }catch(e){
@@ -37,7 +37,8 @@ exports.uploadXLsxFile = async (req, res) => {
       const dob = moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD');
       const dateofjoining = moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD');
       if (!moment(dob, 'YYYY-MM-DD', true).isValid() || !moment(dateofjoining, 'YYYY-MM-DD', true).isValid()) {
-        return res.status(400).json({message:'Invalid date format in the XLSX file'});
+        throw new Error('Invalid date format in the XLSX file');
+      
       }
 
       return {
@@ -60,7 +61,7 @@ exports.uploadXLsxFile = async (req, res) => {
       throw new Error('Invalid file type');
     }
   } catch (error) {
-    console.error('Error uploading file and extracting data:', error);
+    // console.error('Error uploading file and extracting data:', error);
     res.status(500).json({ error: 'Error uploading file and extracting data' });
   }
   
