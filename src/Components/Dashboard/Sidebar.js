@@ -178,7 +178,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
     <div >
      
           {isSmallScreen && (
-             <AppBar sx={{ backgroundColor: 'black', height: "70.2px" }}>
+             <AppBar sx={{ backgroundColor: 'white', height: "70.2px" }}>
     
 
 
@@ -203,9 +203,9 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
           variant="permanent"
           open
           sx={{
-            width: 200,
+            width: 204,
             flexShrink: 0,
-            [`& .MuiDrawer-paper`]: { width: 200 },
+            [`& .MuiDrawer-paper`]: { width: 220 },
           }}
         >
           {drawer}
@@ -216,10 +216,10 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
           variant="temporary"
           open={open}
           sx={{
-            width: 400, // Adjust the width as needed
+            width: 260, // Adjust the width as needed
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              width: 400, // Adjust the width as needed
+              width: 260, // Adjust the width as needed
             },
           }}
           onClose={handleDrawerToggle}

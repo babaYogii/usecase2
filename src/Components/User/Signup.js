@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery, Alert } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery } from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import { AccountCircle, Mail, Https } from '@mui/icons-material';
 import theme from '../../Theme/theme';
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing(4),
+        gap: theme.spacing(2),
     },
     textField: {
         display: 'flex',
@@ -92,60 +92,99 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Signup = () => {
-     const navigate=useNavigate();
+    const navigate = useNavigate();
     const classes = useStyles();
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    console.log(isSmallScreen)
 
     const [userData, setUserData] = React.useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
-    const [error, setError] = React.useState({ message: '' });
-    const [errorState, setErrorState] = React.useState(false);
+
+    const [errors, setErrors] = React.useState({});
+    const [isSubmit, setisSubmit] = useState(false);
 
 
-    React.useEffect(()=>{
-
-        let a=localStorage.getItem('token')
+    useEffect(() => {
+    
         
-         if(a){
-           navigate('/dashboard')
-            }
+        let a = localStorage.getItem('token')
+
+        if (a) {
+            navigate('/dashboard')
         }
+    },[navigate,errors]
     )
+
+
 
     const handelChange = (e) => {
         setUserData({
             ...userData,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...userData,
+            [e.target.name]: e.target.value
+          }));
     }
 
     const handelSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setErrors(validate(userData));
+        
+        
+        if(Object.keys(errors).length===0 && isSubmit){
+        
         try {
             const response = await signup({ ...userData });
-            console.log(response.data)
-              if(response.status===201){
+            console.log(response.data);
+            if (response.status === 201) {
                 navigate('/signin')
-              }
+            }
         } catch (e) {
+            alert(e.response.data.message)
             console.log(e.response.data.message)
-            setError((prevError) => ({ ...prevError, message: e.response.data.message }));
             // console.log(error)
         }
+    }
+        setisSubmit(true)
 
         // console.log(userData);
     }
-    useEffect(() => {
-        console.log(error)
-        if(error.message.length>0){
+    
 
-            setErrorState(true)
+
+    const validate = (values) => {
+        const notFill = {};
+        var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,10}$/;
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.firstName) {
+            notFill.firstName = "First Name is required"
+        } else if (values.firstName.trim().length < 2) {
+            notFill.firstName = "Name cannot be less than 2 characters"
         }
-        setTimeout(() => {
-            setErrorState(false)
-            
-        }, 2000);
-    }, [error])
+        if (!values.lastName) {
+            notFill.lastName = "Last Name is required"
+        }
+        if (!values.email) {
+            notFill.email = "Email is required"
+        } else if (!regex.test(values.email)) {
+            notFill.email = "Enter valid email"
+        }
+        if (!values.password) {
+            notFill.password = "Please enter the password"
+        } else if (!regularExpression.test(values.password)) {
+            notFill.password = "1 special character \n Less than 10 character and greater than 6 character \n1 small case "
+        }
+        if (values.password !== values.confirmPassword) {
+            notFill.confirmPassword = "Password and confirm password does not match"
+        }
+
+        return notFill;
+    }
+
+
+
+
+
 
 
 
@@ -154,12 +193,8 @@ const Signup = () => {
         <Box maxWidth="100%" sx={{
             display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%',
 
-        }}>{(error.message.length>0 && errorState) && 
-     <Alert severity='info' sx={{ position: 'absolute',
-     top: '8%',
-     right: '20%',zIndex:1,
-     margin: 0, }}>{error.message}</Alert>
-         }   <Paper className={classes.styledpaper} elevation={6}
+        }}>
+            <Paper className={classes.styledpaper} elevation={12} gap={3}
                 sx={{
                     display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', minWidth: 300,
                     width: isSmallScreen ? '100%' : '50%',
@@ -188,11 +223,10 @@ const Signup = () => {
 
 
 
-                <Box className={classes.paper} width={isSmallScreen ? '100vw' : 'auto'}
-                >
+                <Box className={classes.paper} width={isSmallScreen ? '100vw' : 'auto'} >
 
                     <form className={classes.form} onSubmit={handelSubmit} noValidate autoComplete='off'>
-                        <Box display="flex" alignItems="center" sx={{ zIndex: 1, mt: 6 }}>
+                        <Box  sx={{ zIndex: 1, mt: 6 }} display='flex' flexDirection='column' >
                             <TextField type='text' label="First Name" required name='firstName' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -207,9 +241,11 @@ const Signup = () => {
 
                                 fullWidth
                             />
+                             {(errors.firstName && (!userData.firstName || userData.firstName.length < 2)) && <Typography variant='caption' color='red' fontSize="10px">{errors.firstName}</Typography>}
+
                         </Box>
 
-                        <Box display="flex" alignItems="center" sx={{ zIndex: 1 }}>
+                        <Box  sx={{ zIndex: 1 }}>
                             <TextField type='text' label="Last Name" required name='lastName' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -224,9 +260,11 @@ const Signup = () => {
 
                                 fullWidth
                             />
+                            {(errors.lastName && (!userData.lastName || userData.lastName.length < 2)) && <Typography fontSize="10px" variant='caption' color='red'>{errors.lastName}</Typography>}
+
                         </Box>
 
-                        <Box display="flex" alignItems="center" sx={{ zIndex: 1 }}>
+                        <Box  sx={{ zIndex: 1 }}>
                             <TextField type='text' label="Email" required name='email' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -241,8 +279,10 @@ const Signup = () => {
                                 }}
                                 fullWidth
                             />
+                            {(errors.email ) && <Typography variant='caption' fontSize="10px" color='red'>{errors.email}</Typography>}
+
                         </Box>
-                        <Box display="flex" alignItems="center" sx={{ zIndex: 1 }}>
+                        <Box    sx={{ zIndex: 1 }}>
                             <TextField type='password' label="Password" required name='password' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -255,10 +295,13 @@ const Signup = () => {
                                     style: { fontSize: '24px' }
 
                                 }}
+                                
                                 fullWidth
                             />
+                        {(errors.password || (!userData.password)) && <Typography fontSize="10px" sx={{my:4}} variant='caption' color='red'>{errors.password}</Typography>}
+                            
                         </Box>
-                        <Box display="flex" alignItems="center" sx={{ zIndex: 1 }}>
+                        <Box  sx={{ zIndex: 1 }}>
                             <TextField type='password'
                                 sx={{ color: theme.palette.PrimarySecond.main }}
                                 label="Confirm password" required name='confirmPassword' onChange={handelChange}
@@ -275,6 +318,8 @@ const Signup = () => {
                                 }}
                                 fullWidth
                             />
+                           {(errors.confirmPassword && (!userData.confirmPassword || userData.confirmPassword!==userData.password)) && <Typography variant='caption' fontSize="10px" color='red'>{errors.confirmPassword}</Typography>}
+
                         </Box>
 
                         <Button

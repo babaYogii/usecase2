@@ -19,7 +19,7 @@ exports.uploadXLsxFile = async (req, res) => {
         cellDates: true,
       });
       console.log(jsonData);
-  
+      try{
       const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest'];
       const fileColumns = Object.keys(jsonData[0]);
       
@@ -28,17 +28,29 @@ exports.uploadXLsxFile = async (req, res) => {
         return res.status(400).json({message:"Wrong file does not contain all data"})
         // throw new Error('File does not contain all the required columns');
       }
-  
-      const data = jsonData.map((item) => ({
+      
+    }catch(e){
+      console.log(e);
+    }
+    const data = jsonData.map((item) => {
+      // Validate date format for 'dob' and 'dateofjoining' columns
+      const dob = moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD');
+      const dateofjoining = moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD');
+      if (!moment(dob, 'YYYY-MM-DD', true).isValid() || !moment(dateofjoining, 'YYYY-MM-DD', true).isValid()) {
+        return res.status(400).json({message:'Invalid date format in the XLSX file'});
+      }
+
+      return {
         employeeid: item.employeeid,
         employeename: item.employeename,
         employeeemail: item.employeeemail,
-        dob: moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD'),
-        dateofjoining: moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD'),
+        dob,
+        dateofjoining,
         favouriteColour: item.favouriteColour,
         favouritefood: item.favouritefood,
         placeofinterest: item.placeofinterest,
-      }));
+      };
+    });
   
       EmployeeSchema.insertMany(data);
   

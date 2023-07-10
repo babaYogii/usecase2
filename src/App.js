@@ -7,8 +7,9 @@ import Signin from './Components/User/Signin';
 import ProtectedRoute from './ProtectedRoutes';
 import DashboardHome from './Components/Dashboard/DashboardHome';
 import './App.css'
-import UploadFile from './Components/UploadFile';
+import UploadFile from './Components/AdminFunctionality/UploadFile';
 import Landingpage from './Components/Landingpage';
+import AddAdmin from './Components/AdminFunctionality/AddAdmin';
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
             <Route element={<ProtectedRoute/>}>
               <Route path="/dashboard" element={<DashboardHome/>} />
               <Route path="/upload" element={<UploadFile/>}/>
+              <Route path="/" element={<Landingpage/>}/>
+              <Route path="/addAdmin" element={<AddAdmin/>}/>
             </Route>
-            <Route path="/" element={<Landingpage/>}/>
               <Route path="/signup" element={<Signup/>} />
               <Route path="/signin" element={<Signin/>} />
           </Routes>

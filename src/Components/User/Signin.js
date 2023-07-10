@@ -83,7 +83,7 @@ const Signin = () => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }} >
-      <Paper className={classes.paper} elevation={3} sx={{ borderRadius: isSmallScreen ? '0' : '5%', }}>
+      <Paper className={classes.paper} elevation={12} sx={{ borderRadius: isSmallScreen ? '0' : '5%', }}>
 
         <Box flex={1.7} padding={2} width='80%'>
 

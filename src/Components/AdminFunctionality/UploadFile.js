@@ -45,12 +45,12 @@ const UploadFile = () => {
                 })
                 .catch(error => {
                     
-                    alert('File contains incomplete Data')
+                    alert('File contains incomplete Data/Date format is not in YYYY-MM-DD')
                     console.error('Error uploading file:', error);
                 });
         } else {
-            alert('Not a valid file')
-            console.log('File type not supported');
+            alert('File type not supported')
+            console.log('File type not supported/Date format is not in YYYY-MM-DD');
         }
     };
 
@@ -58,9 +58,9 @@ const UploadFile = () => {
 
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
             <Typography></Typography>
-            <Paper sx={{padding:5}} elevation={3}>
+            <Paper sx={{padding:5}} elevation={22}>
                 <Typography variant="h4" component='h1' sx={{color:'tertiary.main'}}>Upload File</Typography>
-                <Stack gap={5} sx={{p:8}}>
+                <Stack gap={5} sx={{p:2}}>
                 <TextField
                     
                     id="file-upload"
@@ -70,6 +70,8 @@ const UploadFile = () => {
                     error={!!error}
                     helperText={error}
                     />
+                <Typography variant='caption' fontSize='13px' sx={{color:'#3498db',my:-4.2,fontWeight:550}}>   * All dates must in YYYY-MM-DD Format</Typography>
+                    
                 <Button variant="contained" type='submit' color="primary" onClick={handleSubmit}>
                     Submit
                 </Button>

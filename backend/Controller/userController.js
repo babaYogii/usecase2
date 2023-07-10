@@ -1,6 +1,6 @@
 const jwt=require('jsonwebtoken')
 const User=require('../Model/userModel');
-const { JoinFullTwoTone } = require('@mui/icons-material');
+
 
 
 
@@ -31,9 +31,14 @@ exports.signUp=async(req,res)=>{
 
       const {firstName,lastName,password,email,confirmPassword}=req.body;
       let{role,currentUserRole}=req.body;
-      role=role.toLowerCase();
-      currentUserRole=currentUserRole.toLowerCase();
+      //  console.log(role)
+
+      if(typeof role=='undefined'|| typeof currentUserRole === 'undefined'){
+         return res.status(400).json({message:'Missing some fields'});
+      }
+          role=role.toLowerCase();
       
+         currentUserRole=currentUserRole.toLowerCase();
       
       if(currentUserRole=='admin' ){
       try {

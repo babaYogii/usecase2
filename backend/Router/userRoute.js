@@ -7,6 +7,7 @@ const { uploadXLsxFile } = require('../Controller/employeeControlller');
 const router=express.Router();
 
 const multer = require('multer');
+const { requiresignin } = require('../Middleware/requiresSignin');
 const upload = multer({ dest: 'uploads/' });
 
 
@@ -19,7 +20,7 @@ router.post('/reset-password/:token',resetPassword);
 
 router.post('/signin',validateSignInrequest,isRequestValidated,signin );
 
-router.post('/addadmin',validateSignUpRequest,isRequestValidated,adminSignUp)
+router.post('/addadmin',requiresignin,validateSignUpRequest,isRequestValidated,adminSignUp)
 
 router.post('/uploadfile',upload.single('file'),uploadXLsxFile)
 
