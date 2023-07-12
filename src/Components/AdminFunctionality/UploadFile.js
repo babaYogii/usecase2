@@ -45,7 +45,7 @@ const UploadFile = () => {
                 })
                 .catch(error => {
                     
-                    alert('File contains incomplete Data/Date format is not in YYYY-MM-DD')
+                    alert('File contains incomplete/repeated Data/Date format is not in YYYY-MM-DD')
                     console.error('Error uploading file:', error);
                 });
         } else {

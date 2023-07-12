@@ -1,12 +1,13 @@
 import { Box, Button, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { AddUser } from '../../api/adminApi';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddAdmin = () => {
     const [selectedRole, setSelectedRole] = useState('');
     const [userData, setUserData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' });
-
+   const navigate=useNavigate();
     const handleRoleChange = (event) => {
         setSelectedRole(event.target.value);
     };
@@ -35,6 +36,16 @@ const AddAdmin = () => {
         }
 
     };
+
+    const userRole = localStorage.getItem('role');
+
+    React.useEffect(()=>{
+        if (userRole.toUpperCase() !== `"ADMIN"`) {
+          
+            navigate('/dashboard'); 
+          }
+    })
+
 
     return (
         <Box sx={{ display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>

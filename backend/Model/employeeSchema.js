@@ -32,6 +32,12 @@ const employeeSchema = new mongoose.Schema({
       },placeofinterest:{
         type:String,
         required:true
+      },profileimage:{
+        type:String,
+        required:true
+      },profession:{
+        type:String,
+        required:true
       }
   });
 

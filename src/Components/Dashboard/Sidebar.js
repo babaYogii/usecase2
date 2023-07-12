@@ -44,7 +44,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
 
   const fetchBirthDate = async () => {
     try {
-      const response = await getUpcomingBirthdays('7days');
+      const response = await getUpcomingBirthdays('1days');
       setBirthday(response.data);
 
     }
@@ -55,7 +55,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
 
   const fetchAniversaryDate = async () => {
     try {
-      const response = await getUpcomingAnniversary('7days');
+      const response = await getUpcomingAnniversary('days');
       setAnniversary(response.data);
     } catch (error) {
       console.log(error);
@@ -149,6 +149,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
           </ListItem>
         ))}
       </List>
+
       <Divider />
 
       {role.toUpperCase() === "ADMIN" ? <>

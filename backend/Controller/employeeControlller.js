@@ -20,7 +20,7 @@ exports.uploadXLsxFile = async (req, res) => {
       });
       console.log(jsonData);
       try{
-      const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest'];
+      const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest','profileimage','profession'];
       const fileColumns = Object.keys(jsonData[0]);
       
       const hasAllColumns = requiredColumns.every((column) => fileColumns.includes(column));
@@ -50,8 +50,17 @@ exports.uploadXLsxFile = async (req, res) => {
         favouriteColour: item.favouriteColour,
         favouritefood: item.favouritefood,
         placeofinterest: item.placeofinterest,
+        profileimage:item.profileimage,
+        profession:item.profession
       };
     });
+
+    const existingEmployeeIds = await EmployeeSchema.distinct('employeeid', { employeeid: { $in: data.map((item) => item.employeeid) } });
+    const duplicateEmployeeIds = data.filter((item) => existingEmployeeIds.includes(item.employeeid));
+    if (duplicateEmployeeIds.length > 0) {
+      return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
+    }
+
   
       EmployeeSchema.insertMany(data);
   
@@ -145,7 +154,7 @@ exports.getUpcomingBirthdays = async (req, res) => {
           break;
 
         default:
-          if(isUpcomingEventWithinLimit(eventDate,today,365)){
+          if(isUpcomingEventWithinLimit(eventDate,today,0)){
             ans.push(employee[i]);
            }
           break;
@@ -207,7 +216,7 @@ exports.getUpcomingAnniversary = async (req, res) => {
           break;
 
         default:
-          if(isUpcomingEventWithinLimit(eventDate,today,365)){
+          if(isUpcomingEventWithinLimit(eventDate,today,0)){
             ans.push(employee[i]);
            }
           break;

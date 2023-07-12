@@ -7,21 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const fadeInAnimation = keyframes`
   10% {
-    opacity: 0;
+    opacity: 0.2;
     
   }
-  30% {
-    opacity: 0.4;
   
-  }
   50%{
     opacity: 0.6;
     
   }
-  70%{
-    opacity:0.8
-   
-  }
+ 
   100%{
     opacity:1
   }
@@ -29,7 +23,7 @@ const fadeInAnimation = keyframes`
 
 
 const AnimatedTypography = styled(Typography)`
-  animation: ${fadeInAnimation} 4s ease-in;
+  animation: ${fadeInAnimation} 2000ms ease-in infinite;
 `;
 
 const LandingPage = () => {
@@ -56,7 +50,7 @@ const LandingPage = () => {
             <AnimatedTypography
                 sx={{
                     display: 'inline-block',
-                    transform: 'rotate(-23deg)',
+                    transform: 'rotate(-30deg)',
                     margin: '0 100px',
                     fontSize: '3rem',
                     my:0
@@ -67,7 +61,7 @@ const LandingPage = () => {
             <AnimatedTypography
                 sx={{
                     display: 'inline-block',
-                    transform: 'rotate(23deg)',
+                    transform: 'rotate(30deg)',
                     margin: '0 -80px',
                     fontSize: '3rem',
                 }}
