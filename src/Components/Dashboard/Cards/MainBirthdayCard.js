@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Box, Card,  CardMedia,  IconButton, Typography } from '@mui/material';
 import {  ArrowForward } from '@mui/icons-material';
-import BasicModal from '../Modal/BirthdayModal';
+import BasicBirthdayModal from '../../Modal/BirthdayModal';
 
 const MainCard = ({ birthday, index }) => {
     const birthdayCardColor =
@@ -45,7 +45,7 @@ const MainCard = ({ birthday, index }) => {
                 position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1, backdropFilter: 'blur(7px)',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
             }}>
-                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontWeight: 500, fontSize: '18px' }}>{birthday.employeename}</Typography>
+                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontWeight: 500, fontSize: '16px' }}>{birthday.employeename}</Typography>
                 <Box sx={{ alignItems: 'center', display: 'flex' }}>
                     <Typography variant="caption" sx={{ mx: 1, my: 0, color: 'black' }}>{birthday.profession}</Typography>
                     <IconButton  onClick={()=>{handleModal()}}>
@@ -53,7 +53,7 @@ const MainCard = ({ birthday, index }) => {
                     </IconButton>
                 </Box>
             </Box>
-        <BasicModal  open={open} handleClose={handleClose} birthday={birthday} />
+        <BasicBirthdayModal  open={open} handleClose={handleClose} birthday={birthday} />
        
 
         </Card>

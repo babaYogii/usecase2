@@ -3,7 +3,8 @@ import { Box, Divider, IconButton, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti';
-import MainCard from './MainBirthdayCard';
+import MainCard from './Cards/MainBirthdayCard';
+import MainWorkAniversaryCard from './Cards/MainWorkAniversaryCard';
 
 
 const MainComponent = ({ birthday, anniversary }) => {
@@ -121,7 +122,7 @@ const MainComponent = ({ birthday, anniversary }) => {
             {sortedanniversary.length > 0 ? sortedanniversary.map((anniversary, index) => {
               return (
 
-                <MainCard birthday={anniversary} index={index} key={index} />
+                <MainWorkAniversaryCard birthday={anniversary} index={index} key={index} />
               );
             }) :
               <Typography variant='h3' sx={{ width: '100%' }} align='center'>" No-upcoming work Anniversary "</Typography>

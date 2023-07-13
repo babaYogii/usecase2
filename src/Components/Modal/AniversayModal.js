@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicBirthdayModal({ open, handleClose, birthday }) {
+export default function BasicWorkAniversaryModal({ open, handleClose, birthday }) {
 
   console.log(birthday.employeename);
   //   console.log(open);
@@ -58,7 +58,7 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{ color: 'black', textDecoration: 'none' }}>Wish them</a></Typography>
+            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{ textDecoration: 'none' }}>Wish them on completing {new Date().getFullYear()-new Date(birthday.dateofjoining).getFullYear()} years</a></Typography>
 
           </Box>
         </Box>
