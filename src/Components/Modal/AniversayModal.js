@@ -58,7 +58,7 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{ textDecoration: 'none' }}>Wish them on completing {new Date().getFullYear()-new Date(birthday.dateofjoining).getFullYear()} years</a></Typography>
+            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{ textDecoration: 'none' }}>Wish on completing {new Date().getFullYear()-new Date(birthday.dateofjoining).getFullYear()} years</a></Typography>
 
           </Box>
         </Box>

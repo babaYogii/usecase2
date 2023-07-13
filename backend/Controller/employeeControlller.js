@@ -231,3 +231,13 @@ exports.getUpcomingAnniversary = async (req, res) => {
     res.status(500).json({ error: 'Error in retreving data:' });
   }
 };
+
+exports.getAllEmployee=async(req,res)=>{
+     
+  try{
+    const employee = await EmployeeSchema.find().sort({ employeeid: 1 });
+    return res.status(200).json(employee);
+  }catch(error){
+
+  }
+}

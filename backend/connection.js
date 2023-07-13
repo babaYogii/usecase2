@@ -4,14 +4,19 @@ const mongoose=require('mongoose')
 const url="mongodb+srv://yogeshkodlinge:Yogesh123@cluster0.ymuefl6.mongodb.net/";
 
 
-const connectDb=async()=>
+const connectDb=async(req,res)=>
 {
-  
-        const response=await mongoose.connect(url,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,})
-           return response;
-   
+  try{
+    const response=await mongoose.connect(url,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,})
+        console.log("Connected successfully")
+     
+
+  }catch(error){
+    res.status(500).json({message:'Internal server error'})
+  }
+    
 
 
 }   

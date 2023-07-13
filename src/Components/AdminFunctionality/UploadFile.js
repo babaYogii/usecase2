@@ -38,13 +38,11 @@ const UploadFile = () => {
 
             axios.post('http://localhost:4000/uploadfile', formData)
                 .then(response => {
-                    // Handle response from the server
                     alert('File uploaded successfully')
                     navigate('/dashboard');
                     console.log('File uploaded successfully');
                 })
                 .catch(error => {
-                    
                     alert('File contains incomplete/repeated Data/Date format is not in YYYY-MM-DD')
                     console.error('Error uploading file:', error);
                 });
@@ -56,7 +54,7 @@ const UploadFile = () => {
 
     return (
 
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh',width:'70vw' }}>
             <Typography></Typography>
             <Paper sx={{padding:5}} elevation={22}>
                 <Typography variant="h4" component='h1' sx={{color:'tertiary.main'}}>Upload File</Typography>

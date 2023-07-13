@@ -10,6 +10,7 @@ import './App.css'
 import UploadFile from './Components/AdminFunctionality/UploadFile';
 import Landingpage from './Components/Landingpage';
 import AddAdmin from './Components/AdminFunctionality/AddAdmin';
+import AllEmployee from './Components/Allemployee/AllEmployee';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/upload" element={<UploadFile/>}/>
               <Route path="/" element={<Landingpage/>}/>
               <Route path="/addAdmin" element={<AddAdmin/>}/>
+              <Route path="/getAllEmployee" element={<AllEmployee/>}/>
             </Route>
               <Route path="/signup" element={<Signup/>} />
               <Route path="/signin" element={<Signin/>} />

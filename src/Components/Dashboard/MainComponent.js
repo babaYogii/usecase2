@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Divider, IconButton, Typography } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
+import { Box, Divider,  Typography } from '@mui/material';
+
 import Confetti from 'react-confetti';
 import MainCard from './Cards/MainBirthdayCard';
 import MainWorkAniversaryCard from './Cards/MainWorkAniversaryCard';
@@ -11,7 +10,6 @@ const MainComponent = ({ birthday, anniversary }) => {
   const [sortedBirthdays, setSortedBirthdays] = useState([]);
   const [sortedanniversary, setSortedanniversary] = useState([]);
   console.log(sortedBirthdays)
-  const navigate = useNavigate();
 
 
   const [showConfetti, setShowConfetti] = React.useState(false);
@@ -63,11 +61,7 @@ const MainComponent = ({ birthday, anniversary }) => {
   }, [birthday, anniversary]);
 
 
-  const handelLogout = () => {
-    localStorage.clear();
-    navigate('/signin');
-
-  }
+  
 
 
 
@@ -76,20 +70,16 @@ const MainComponent = ({ birthday, anniversary }) => {
     <div>
 {/* ---------------------------------------Logout Functionality started-------------------------------------------------------------------------         */}
 
-      <Box sx={{ position: 'absolute', top: 40, width: '86.5%', }}>
-        <Box sx={{ height: '20px', padding: 2 }}>
-          <IconButton sx={{ position: 'absolute', right: 30, top: -15 }} onClick={handelLogout}>
-            <LogoutIcon sx={{ mx: 1 }} />Logout
-          </IconButton>
-          <Typography variant='h6' mx={2} my={1.5} >
-            {("Birthdays").toUpperCase()}
-          </Typography>
-        </Box>
+      <Box sx={{ position: 'absolute', top: 40, width: '84.5%',backgroundPosition: 'center',
+    backgroundSize: 'cover',}}>
+        
 
 {/* ---------------------------------------Logout Functionality completed-------------------------------------------------------------------------         */}
         
 {/* ---------------------------------------Card for Birthday started-------------------------------------------------------------------------         */}
-
+          <Typography variant='h6' mx={2} my={1.5} >
+            {("Birthdays").toUpperCase()}
+          </Typography>
         <Box sx={{
           height: '275px', overflowX: 'auto', '&::-webkit-scrollbar': { display: 'none' }
         }} >
@@ -129,7 +119,7 @@ const MainComponent = ({ birthday, anniversary }) => {
             }
           </Box>
         </Box>
-        {showConfetti && (
+        {(showConfetti && (birthday.length >0 || anniversary.length >0) )&& (
           <Confetti
             width={window.innerWidth - 270}
             height={window.innerHeight - 85}

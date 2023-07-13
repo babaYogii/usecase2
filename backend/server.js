@@ -11,19 +11,8 @@ app.use(express.json());
 app.use(userRoute)
 app.use(employeeRoute)
 
-const coonectdb=async ()=>{
-try{
 
-    const response= await connectDb();
-    console.log("connected successfully ...");
-}catch(error){
-    return console.log(error);
-}
-    
-    
-}
-
-coonectdb();
+connectDb();
 
 
 

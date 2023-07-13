@@ -58,7 +58,7 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{ color: 'black', textDecoration: 'none' }}>Wish them</a></Typography>
+            <Typography display='block' variant='subtitle2'><a href={`mailto:${(birthday.employeeemail).toString()}`} style={{  textDecoration: 'none' }}>Wish Now</a></Typography>
 
           </Box>
         </Box>

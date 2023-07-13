@@ -2,6 +2,8 @@ import { Box, Button, MenuItem, Paper, Select, TextField, Typography } from '@mu
 import React, { useState } from 'react';
 import { AddUser } from '../../api/adminApi';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 const AddAdmin = () => {
@@ -11,6 +13,8 @@ const AddAdmin = () => {
     const handleRoleChange = (event) => {
         setSelectedRole(event.target.value);
     };
+    const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleChange = (e) => {
         setUserData({
@@ -19,7 +23,7 @@ const AddAdmin = () => {
         });
     };
 
-
+    
     const handleSubmit =async (e) => {
         e.preventDefault();
         console.log('button clicked');
@@ -28,12 +32,14 @@ const AddAdmin = () => {
         try{
             const response=await AddUser({...userData,role:selectedRole});
             alert("Success")
+            
             console.log(response);
         }catch(error){
             alert(error.response.data.message)
             
             console.log(error)
         }
+        
 
     };
 
@@ -41,32 +47,31 @@ const AddAdmin = () => {
 
     React.useEffect(()=>{
         if (userRole.toUpperCase() !== `"ADMIN"`) {
-          
-            navigate('/dashboard'); 
+                     navigate('/dashboard'); 
           }
     })
 
 
     return (
-        <Box sx={{ display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
-            <Paper elevation={22} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '25%',p:4,gap:2 }} >
+        <Box sx={{ display: 'flex', width: '70vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
+            <Paper elevation={23} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',p:8,gap:2,width: isSmallScreen ? '100%' : 'auto'  }} >
                 <Typography variant='h4' sx={{color:'primary.main'}}>Add User</Typography>
                 <form onSubmit={handleSubmit} noValidate autoComplete='off'>
                     <Box sx={{display:'flex',flexDirection:'column', gap:2.5}}>
 
-                        <TextField type="text" label="First Name" required name="firstName" onChange={handleChange} fullWidth />
+                        <TextField type="text" label="First Name" required name="firstName" onChange={handleChange}  />
 
 
-                        <TextField type="text" label="Last Name" required name="lastName" onChange={handleChange} fullWidth />
+                        <TextField type="text" label="Last Name" required name="lastName" onChange={handleChange}  />
 
 
-                        <TextField type="text" label="Email" required name="email" onChange={handleChange} fullWidth />
+                        <TextField type="text" label="Email" required name="email" onChange={handleChange}  />
 
 
-                        <TextField type="password" label="Password" required name="password" onChange={handleChange} fullWidth />
+                        <TextField type="password" label="Password" required name="password" onChange={handleChange}  />
 
 
-                        <TextField type="password" label="Confirm Password" required name="confirmPassword" onChange={handleChange} fullWidth />
+                        <TextField type="password" label="Confirm Password" required name="confirmPassword" onChange={handleChange}  />
 
 
                         <Select

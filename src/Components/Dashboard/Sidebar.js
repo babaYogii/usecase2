@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
+function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItemSelect }) {
 
   const classes = useStyles();
   const theme = useTheme();
@@ -36,15 +36,19 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
+    onMenuItemSelect("maincomponent")
   };
 
   const handleItemClickforAnniversary = (item) => {
     setSelectedItemforAnniversary(item);
+    onMenuItemSelect("maincomponent")
+
   };
 
   const fetchBirthDate = async () => {
     try {
       const response = await getUpcomingBirthdays('1days');
+      onMenuItemSelect("maincomponent")
       setBirthday(response.data);
 
     }
@@ -57,6 +61,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
     try {
       const response = await getUpcomingAnniversary('days');
       setAnniversary(response.data);
+      onMenuItemSelect("maincomponent")
     } catch (error) {
       console.log(error);
     }
@@ -122,10 +127,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
 
               }}
               disableRipple
-              onClick={() => { handelBirthClick(menuItem.urlString); handleItemClick(menuItem.text); }}>
-              {/* <ListItemIcon className='icon-primary'> */}
-              {/* {menuItem.icon} */}
-              {/* </ListItemIcon> */}
+              onClick={() => { handelBirthClick(menuItem.urlString); handleItemClick(menuItem.text) }}>
               <ListItemText secondary={menuItem.text} color="text.primary" />
             </ListItemButton>
           </ListItem>
@@ -141,9 +143,6 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
             <ListItemButton
               sx={{ backgroundColor: selectedItemforAnniversary === menuItem.text ? '#F9E0BB' : 'inherit' }}
               onClick={() => { handelAnniversaryClick(menuItem.urlString); handleItemClickforAnniversary(menuItem.text) }}>
-              {/* <ListItemIcon className='icon-primary'> */}
-              {/* {menuItem.icon} */}
-              {/* </ListItemIcon> */}
               <ListItemText secondary={menuItem.text} />
             </ListItemButton>
           </ListItem>
@@ -153,19 +152,27 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary }) {
       <Divider />
 
       {role.toUpperCase() === "ADMIN" ? <>
-        <List>
-          <ListItemButton onClick={() => navigate('/upload')}>
+        <List sx={{m:0,p:0}}>
+          <ListItemButton onClick={()=>{onMenuItemSelect("AddFile")}}>
             <ListItemIcon className='icon-primary'>
             </ListItemIcon>
             <ListItemText primary={"Add File"} />
           </ListItemButton>
         </List>
         <Divider />
-        <List>
-          <ListItemButton onClick={() => navigate('/addAdmin')}>
+        <List sx={{m:0,p:0}}>
+          <ListItemButton onClick={()=>{onMenuItemSelect("Addadmin")}}>
             <ListItemIcon className='icon-primary'>
             </ListItemIcon>
             <ListItemText primary={"Add Admin"} />
+          </ListItemButton>
+        </List>
+        <Divider />
+        <List sx={{m:0,p:0}}>
+          <ListItemButton onClick={()=>{onMenuItemSelect("AllEmployee")}}>
+            <ListItemIcon className='icon-primary'>
+            </ListItemIcon>
+            <ListItemText primary={"View All"} />
           </ListItemButton>
         </List>
         <Divider />
