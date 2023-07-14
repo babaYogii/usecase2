@@ -19,7 +19,7 @@ const MainWorkAniversaryCard = ({ birthday, index }) => {
 
     const [expanded, setExpanded] = useState(false);
     const trophyCount = new Date().getFullYear() - new Date(birthday.dateofjoining).getFullYear();
-    const maxTrophyCount = 10;
+    const maxTrophyCount = 9;
 
 
     return (
@@ -46,7 +46,6 @@ const MainWorkAniversaryCard = ({ birthday, index }) => {
                     image={birthday.profileimage}
                     alt="Paella dish"
                     sx={{ objectFit: 'cover' }}
-                    zIndex='-1'
                 />
             </Box>
 

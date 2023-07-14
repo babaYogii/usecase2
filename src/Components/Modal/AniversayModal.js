@@ -18,8 +18,6 @@ const style = {
 
 export default function BasicWorkAniversaryModal({ open, handleClose, birthday }) {
 
-  console.log(birthday.employeename);
-  //   console.log(open);
 
   
 

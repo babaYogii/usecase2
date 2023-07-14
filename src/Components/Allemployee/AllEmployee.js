@@ -3,6 +3,7 @@ import React from 'react';
 import { getAllEmployee } from '../../api/userApi';
 import { Card,  IconButton, Typography } from '@mui/material';
 import {  Delete } from '@mui/icons-material';
+import { DeleteEmployeeApi } from '../../api/adminApi';
 
 const AllEmployee = ({ setAllemp, allemp }) => {
     const fetchData = async () => {
@@ -10,19 +11,32 @@ const AllEmployee = ({ setAllemp, allemp }) => {
         setAllemp(response.data);
     };
 
+    const DeleteEmployee=async(id)=>{
+        try{
+            const response =await DeleteEmployeeApi(id);
+            setAllemp(allemp.filter(emp => emp._id !== id));
+            console.log(response);
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     React.useEffect(() => {
         fetchData();
-    });
+    },[]);
+
+    
+
+
 
     return (
         <Box
             sx={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 height: '100vh',
                 width: '80vw',
-                my: 55
+                my: 10
+
             }}
         >
             {allemp && allemp.length > 0 && (
@@ -42,7 +56,9 @@ const AllEmployee = ({ setAllemp, allemp }) => {
 
                                 }}
                             >
-                                <IconButton sx={{position:'absolute',right:10,top:8,}}>
+                                <IconButton sx={{position:'absolute',right:10,top:8,}} onClick={()=>{
+                                    DeleteEmployee(emp._id)
+                                }}>
                                 <Delete sx={{color:'Amber.main'}} />
                                 </IconButton>
                                 <Box className="upper-box" sx={{ p: 3, }}>

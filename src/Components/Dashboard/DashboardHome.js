@@ -14,13 +14,11 @@ function Dashboard() {
   const [allemp,setAllemp]=useState();
   const [birthday, setBirthday] = useState([]);
   const [anniversary, setAnniversary] = useState([])
-  console.log(birthday);
   const [selectedMenuItem, setSelectedMenuItem] = useState('');
 
   const handleMenuItemSelect = (menuItem) => {
     setSelectedMenuItem(menuItem);
   };
-  console.log(selectedMenuItem)
   const handelLogout = () => {
     localStorage.clear();
     navigate('/signin');
@@ -54,7 +52,6 @@ function Dashboard() {
          
         </Box>
       <Sidebar flex={1} setBirthday={setBirthday} birthday={birthday} anniversary={anniversary} onMenuItemSelect={handleMenuItemSelect} setAnniversary={setAnniversary} />
-      {/* <MainComponent flex={4} setBirthday={setBirthday} birthday={birthday} anniversary={anniversary} setAnniversary={setAnniversary} /> */}
       <div>{renderDashboardComponent()}</div>
     </Box>
   );

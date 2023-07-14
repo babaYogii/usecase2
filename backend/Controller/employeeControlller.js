@@ -8,7 +8,7 @@ exports.uploadXLsxFile = async (req, res) => {
   try {
     const filePath = req.file.path;
     const fileExtension = req.file.originalname.split('.').pop().toLowerCase();
-  
+
     if (fileExtension === 'xlsx') {
       const fileData = fs.readFileSync(filePath);
       const workbook = XLSX.read(fileData, { type: 'buffer' });
@@ -19,51 +19,51 @@ exports.uploadXLsxFile = async (req, res) => {
         cellDates: true,
       });
       console.log(jsonData);
-      try{
-      const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest','profileimage','profession'];
-      const fileColumns = Object.keys(jsonData[0]);
-      
-      const hasAllColumns = requiredColumns.every((column) => fileColumns.includes(column));
-      if (!hasAllColumns) {
-        return res.status(400).json({message:"Wrong file does not contain all data"})
-     
+      try {
+        const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest', 'profileimage', 'profession'];
+        const fileColumns = Object.keys(jsonData[0]);
+
+        const hasAllColumns = requiredColumns.every((column) => fileColumns.includes(column));
+        if (!hasAllColumns) {
+          return res.status(400).json({ message: "Wrong file does not contain all data" })
+
+        }
+
+      } catch (e) {
+        console.log(e);
       }
-      
-    }catch(e){
-      console.log(e);
-    }
-    const data = jsonData.map((item) => {
-      // Validate date format for 'dob' and 'dateofjoining' columns
-      const dob = moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD');
-      const dateofjoining = moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD');
-      if (!moment(dob, 'YYYY-MM-DD', true).isValid() || !moment(dateofjoining, 'YYYY-MM-DD', true).isValid()) {
-        throw new Error('Invalid date format in the XLSX file');
-      
+      const data = jsonData.map((item) => {
+        // Validate date format for 'dob' and 'dateofjoining' columns
+        const dob = moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD');
+        const dateofjoining = moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD');
+        if (!moment(dob, 'YYYY-MM-DD', true).isValid() || !moment(dateofjoining, 'YYYY-MM-DD', true).isValid()) {
+          throw new Error('Invalid date format in the XLSX file');
+
+        }
+
+        return {
+          employeeid: item.employeeid,
+          employeename: item.employeename,
+          employeeemail: item.employeeemail,
+          dob,
+          dateofjoining,
+          favouriteColour: item.favouriteColour,
+          favouritefood: item.favouritefood,
+          placeofinterest: item.placeofinterest,
+          profileimage: item.profileimage,
+          profession: item.profession
+        };
+      });
+
+      const existingEmployeeIds = await EmployeeSchema.distinct('employeeid', { employeeid: { $in: data.map((item) => item.employeeid) } });
+      const duplicateEmployeeIds = data.filter((item) => existingEmployeeIds.includes(item.employeeid));
+      if (duplicateEmployeeIds.length > 0) {
+        return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
       }
 
-      return {
-        employeeid: item.employeeid,
-        employeename: item.employeename,
-        employeeemail: item.employeeemail,
-        dob,
-        dateofjoining,
-        favouriteColour: item.favouriteColour,
-        favouritefood: item.favouritefood,
-        placeofinterest: item.placeofinterest,
-        profileimage:item.profileimage,
-        profession:item.profession
-      };
-    });
 
-    const existingEmployeeIds = await EmployeeSchema.distinct('employeeid', { employeeid: { $in: data.map((item) => item.employeeid) } });
-    const duplicateEmployeeIds = data.filter((item) => existingEmployeeIds.includes(item.employeeid));
-    if (duplicateEmployeeIds.length > 0) {
-      return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
-    }
-
-  
       EmployeeSchema.insertMany(data);
-  
+
       await emptyDir('./uploads');
       res.status(200).json({ message: 'File uploaded and data extracted successfully' });
     } else {
@@ -73,7 +73,7 @@ exports.uploadXLsxFile = async (req, res) => {
     // console.error('Error uploading file and extracting data:', error);
     res.status(500).json({ error: 'Error uploading file and extracting data' });
   }
-  
+
 
 };
 
@@ -125,38 +125,38 @@ exports.getUpcomingBirthdays = async (req, res) => {
 
     for (var i = 0; i < employee.length; i++) {
       const eventDate = employee[i].dob;
-      
+
 
       switch (days) {
         case "7days":
-  
-           if(isUpcomingEventWithinLimit(eventDate,today,7)){
+
+          if (isUpcomingEventWithinLimit(eventDate, today, 7)) {
             ans.push(employee[i]);
-           }
-         
+          }
+
           break;
         case "14days":
 
-          if(isUpcomingEventWithinLimit(eventDate,today,14)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 14)) {
             ans.push(employee[i]);
-           }
-          
+          }
+
           break;
         case "1month":
-          if(isUpcomingEventWithinLimit(eventDate,today,30)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 30)) {
             ans.push(employee[i]);
-           }
+          }
           break;
         case "6months":
-          if(isUpcomingEventWithinLimit(eventDate,today,180)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 180)) {
             ans.push(employee[i]);
-           }
+          }
           break;
 
         default:
-          if(isUpcomingEventWithinLimit(eventDate,today,0)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 0)) {
             ans.push(employee[i]);
-           }
+          }
           break;
       }
 
@@ -181,9 +181,9 @@ exports.getUpcomingAnniversary = async (req, res) => {
   try {
     const days = req.params.days;
     const today = new Date();
-   
+
     const employee = await EmployeeSchema.find().sort({ dob: 1 });
-     
+
     const ans = [];
 
     for (var i = 0; i < employee.length; i++) {
@@ -191,34 +191,34 @@ exports.getUpcomingAnniversary = async (req, res) => {
 
       switch (days) {
         case "7days":
-  
-           if(isUpcomingEventWithinLimit(eventDate,today,7)){
+
+          if (isUpcomingEventWithinLimit(eventDate, today, 7)) {
             ans.push(employee[i]);
-           }
-         
+          }
+
           break;
         case "14days":
 
-          if(isUpcomingEventWithinLimit(eventDate,today,14)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 14)) {
             ans.push(employee[i]);
-           }
-          
+          }
+
           break;
         case "1month":
-          if(isUpcomingEventWithinLimit(eventDate,today,30)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 30)) {
             ans.push(employee[i]);
-           }
+          }
           break;
         case "6months":
-          if(isUpcomingEventWithinLimit(eventDate,today,180)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 180)) {
             ans.push(employee[i]);
-           }
+          }
           break;
 
         default:
-          if(isUpcomingEventWithinLimit(eventDate,today,0)){
+          if (isUpcomingEventWithinLimit(eventDate, today, 0)) {
             ans.push(employee[i]);
-           }
+          }
           break;
       }
 
@@ -232,12 +232,28 @@ exports.getUpcomingAnniversary = async (req, res) => {
   }
 };
 
-exports.getAllEmployee=async(req,res)=>{
-     
-  try{
+exports.getAllEmployee = async (req, res) => {
+
+  try {
     const employee = await EmployeeSchema.find().sort({ employeeid: 1 });
     return res.status(200).json(employee);
-  }catch(error){
+  } catch (error) {
+    console.log(error)
+  }
+}
 
+exports.deleteEmployee = async (req, res) => {
+  try {
+    const id=req.params.id;
+    const employee=await EmployeeSchema.findOneAndDelete({_id:id});
+    if(employee)
+    return res.status(204).json({message:'Employee deleted successfully'})
+    else{
+      return res.status(404).json({message:'Employee not found'})
+    }
+
+  } catch (error) {
+         console.log(error);
+       return res.status(403).json({message:'Error in deleting employee '});
   }
 }

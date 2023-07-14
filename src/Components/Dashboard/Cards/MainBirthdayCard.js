@@ -37,7 +37,6 @@ const MainCard = ({ birthday, index }) => {
                     image={birthday.profileimage}
                     alt="Paella dish"
                     sx={{ objectFit: 'cover' }}
-                    zIndex='-1'
                 />
             </Box>
 

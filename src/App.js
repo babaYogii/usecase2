@@ -13,6 +13,7 @@ import AddAdmin from './Components/AdminFunctionality/AddAdmin';
 import AllEmployee from './Components/Allemployee/AllEmployee';
 
 function App() {
+  console.log("Check rendering")
   return (
     <BR>
       <ThemeProvider theme={theme}>

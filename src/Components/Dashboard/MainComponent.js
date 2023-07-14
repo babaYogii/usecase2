@@ -9,7 +9,6 @@ import MainWorkAniversaryCard from './Cards/MainWorkAniversaryCard';
 const MainComponent = ({ birthday, anniversary }) => {
   const [sortedBirthdays, setSortedBirthdays] = useState([]);
   const [sortedanniversary, setSortedanniversary] = useState([]);
-  console.log(sortedBirthdays)
 
 
   const [showConfetti, setShowConfetti] = React.useState(false);
