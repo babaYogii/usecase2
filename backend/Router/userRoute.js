@@ -16,7 +16,7 @@ router.post('/signup',validateSignUpRequest,isRequestValidated,signUp);
 
 router.post('/sendmailfor-resetpassword',sendMail);
 
-router.post('/reset-password/:token',resetPassword);
+router.put('/reset-password/:token',resetPassword);
 
 router.post('/signin',validateSignInrequest,isRequestValidated,signin );
 

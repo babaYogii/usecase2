@@ -60,7 +60,7 @@ const UploadFile = () => {
                 <Typography variant="h4" component='h1' sx={{color:'tertiary.main'}}>Upload File</Typography>
                 <Stack gap={5} sx={{p:2}}>
                 <TextField
-                    
+                    accept=".xlsx"
                     id="file-upload"
                     label="Choose File"
                     type="file"

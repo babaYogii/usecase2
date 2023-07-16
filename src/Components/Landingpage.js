@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 import { keyframes,styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-
+import image from '../Orange-Yellow.png'
 
 
 const fadeInAnimation = keyframes`
@@ -11,10 +11,6 @@ const fadeInAnimation = keyframes`
     
   }
   
-  50%{
-    opacity: 0.6;
-    
-  }
  
   100%{
     opacity:1
@@ -23,7 +19,7 @@ const fadeInAnimation = keyframes`
 
 
 const AnimatedTypography = styled(Typography)`
-  animation: ${fadeInAnimation} 2000ms ease-in infinite;
+  animation: ${fadeInAnimation} 1000ms ease-in infinite;
 `;
 
 const LandingPage = () => {
@@ -40,9 +36,12 @@ const LandingPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '80vh',
+                height: '100vh',
+                // width:'100vw',
                 flexDirection: 'column',
-                backgroundColor: 'common.white'
+                backgroundImage:`url(${image})` ,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize:"100% 100%"
             }}
         >
             <Box sx={{display:'flex',my:0}}>
@@ -106,6 +105,9 @@ const LandingPage = () => {
             <Button size='30px' variant='contained' onClick={handleClick}>
                 View Events
             </Button>
+            </Box>
+            <Box sx={{position:'absolute',top:4,left:30, }} className='App-logo'>
+               <img src={'./ExcelWishMaster.png'}  alt='Logo' style={{width:130,borderRadius:'50%',}}/>
             </Box>
         </Box>
     );

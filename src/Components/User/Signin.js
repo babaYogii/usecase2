@@ -40,34 +40,34 @@ const Signin = () => {
   const [user, setUser] = React.useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const navigate = useNavigate();
-  React.useEffect(()=>{
+  React.useEffect(() => {
 
-   let a=localStorage.getItem('token')
-    if(a){
+    let a = localStorage.getItem('token')
+    if (a) {
       navigate('/')
-       }
-  
-   
-},[navigate])
+    }
+
+
+  }, [navigate])
 
 
   const handelChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let response = await signin(user);
       localStorage.setItem('role', JSON.stringify(response.data.user.role));
-    
+
       localStorage.setItem('token', response.data.token);
-     
+
       alert("Success")
       navigate('/')
     } catch (error) {
       console.log(error)
-      if (error.status===400) {
+      if (error.status === 400) {
         alert(error.response.data.message);
       } else {
         alert(error.response.data.message)
@@ -85,7 +85,7 @@ const Signin = () => {
     }} >
       <Paper className={classes.paper} elevation={12} sx={{ borderRadius: isSmallScreen ? '0' : '5%', }}>
 
-        <Box flex={1.7} padding={2} width='80%'>
+        <Box flex={1.7} padding={2}  >
 
           <form className={classes.form} onSubmit={handleSubmit} noValidate autoComplete='off'>
             <Typography variant='h4' align='center' component='h1' fontSize='2.5rem' fontWeight='700'>Login to Your Account</Typography>
@@ -127,17 +127,22 @@ const Signin = () => {
 
             <Button variant="contained" color="primary" type="submit" sx={{ width: '35%', mb: 0 }} disableTouchRipple disableFocusRipple>
               Sign In
-            </Button>
+            </Button>            
+            
             {isSmallScreen ?
               <Box fontSize={12}>
-                <span>Already have an account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></span>
+                <span>Don't have an account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></span>
               </Box> : ""
             }
           </form>
+          <Box sx={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',mt:1}}>
+
+            <Typography component='a' href="/forgot-password" sx={{align:'center'}} variant='caption'>Forgot Password</Typography>
+          </Box>
         </Box>
         <Hidden mdDown>
 
-          <Box flex={1} sx={{ backgroundColor: '#C38154', borderRadius: '0px 20px 20px 0px', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Box flex={1.3} sx={{ backgroundColor: '#C38154', borderRadius: '0px 20px 20px 0px', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Box width={200} display='flex' gap={3.2} flexDirection='column'>
 
               <Typography variant='h4' component='h1' fontWeight='600' align='center' color='whiteSmoke'>New Here?</Typography>

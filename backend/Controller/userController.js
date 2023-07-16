@@ -68,11 +68,10 @@ exports.resetPassword=async(req,res)=>{
    try{
       const token=req.params.token;
       const password=req.body.password;
+      const confirmPassword=req.body.confirmPassword;
       const validateToken=jwt.verify(token,"json");
         const bodyemail=validateToken.email;
-        console.log(validateToken)
-   //   res.send(token)
-   //   console.log(validateToken)
+   
    if(validateToken){
       const userFound = await User.findOne({ email: bodyemail });
         console.log(userFound.password);
@@ -81,16 +80,16 @@ exports.resetPassword=async(req,res)=>{
         }
         
         const updatedUser = await User.findOneAndUpdate(
-         { email:bodyemail }, // Filter condition
-         { password: password }, // Update fields
-         { new: true } // Options: Return the updated document
+         { email:bodyemail }, 
+         { password: password,confirmPassword:confirmPassword },
+         { new: true } 
        );
    
-       return res.status(200).json({message:" Url reset successfull",updatedUser});
+       return res.status(200).json({message:" Password reset successfull",updatedUser});
    }
+   return res.status(403).json({message:'Email not resgistered'})
 }catch(error){
-      console.log(error)
-      return res.status(400).json({message:'Invalid Url'});
+      return res.status(400).json({message:'Invalid Url/Time exceed'});
    }
 }
 

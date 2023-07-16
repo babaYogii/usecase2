@@ -15,11 +15,61 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+const flowerBackground = {
+  backgroundImage: `url('flower-image-url')`, // Replace 'flower-image-url' with the actual URL of your flower image
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+};
 
 export default function BasicWorkAniversaryModal({ open, handleClose, birthday }) {
 
 
   
+  const colorOptions = [
+    'Surprise your friend with beautiful items in their favorite color that will make them smile',
+    'Gift your friend stylish accessories in their preferred hue to enhance their outfits',
+    'Brighten your friend\'s day with artwork showcasing their favorite color',
+    'Add a pop of their preferred color to their living space with decorative items',
+    'Surprise your friend with a colorful gift that reflects their vibrant personality',
+    'Make their day brighter with a thoughtful present in their favorite color',
+    'Decorate their workspace with items in their preferred hue to boost their mood',
+    'Create a customized playlist with songs that evoke the feelings of their favorite color',
+    'Surprise them with a bouquet of flowers in shades of their favorite color',
+    'Prepare a delicious meal featuring ingredients that match their favorite color palette',
+  ];
+
+  const foodOptions = [
+    'Delight your friend with a mouthwatering treat from their favorite food category',
+    'Treat your friend to their all-time favorite dish and watch their face light up',
+    'Surprise your friend with a delicious meal prepared with love',
+    'Indulge your friend in a scrumptious dessert that will satisfy their sweet tooth',
+    'Organize a surprise picnic featuring their favorite foods in a scenic location',
+    'Take them to a popular restaurant known for their specialty in their favorite cuisine',
+    'Arrange a cooking class where they can learn to make their favorite dish from a chef',
+    'Order a gourmet gift basket filled with delicacies from around the world',
+    'Surprise them with a subscription to a monthly food delivery service tailored to their taste',
+    'Plan a progressive dinner, visiting multiple restaurants for different courses of their favorite food',
+  ];
+
+  const placeOptions = [
+    'Gift your friend a travel-related item to fuel their wanderlust for their favorite place',
+    'Help your friend reminisce about their favorite place with a travel-themed surprise',
+    'Surprise your friend with a travel book or journal to inspire their future adventures',
+    'Plan a virtual tour of their beloved destination and explore it together',
+    'Create a personalized itinerary for a day trip that recreates the essence of their favorite place',
+    'Give them a gift card for a local restaurant that offers cuisine from their favorite place',
+    'Book a guided tour that takes them to hidden gems and local attractions of their favorite place',
+    'Surprise them with a travel-inspired piece of artwork or decor for their home',
+    'Organize a themed party that transports them to the culture and ambiance of their favorite place',
+  ];
+  const getRandomOption = (options) => {
+    const randomIndex = Math.floor(Math.random() * options.length);
+    return options[randomIndex];
+  };
+
+  const colorOption = getRandomOption(colorOptions);
+  const foodOption = getRandomOption(foodOptions);
+  const placeOption = getRandomOption(placeOptions);
 
 
   return (
@@ -32,27 +82,27 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
         aria-describedby="modal-modal-description"
 
       >
-        <Box sx={style}>
+        <Box sx={{...style,...flowerBackground}} className='modal-background'>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Know More
           </Typography>
           <Typography variant='subtitle1' sx={{ mt: 2 }}>
-            Palnning a surprise for <strong>{birthday.employeename}</strong>,here are few suggestions
+            Palnning a surprise for <strong>{birthday.employeename}?</strong>,here are few suggestions
           </Typography>
           <hr />
           <Box>
             <Typography display='block' variant='subtitle2'>Favourite color is <strong>{birthday.favouriteColour}</strong></Typography>
-            <Typography variant='caption'>Things you can buy Clothing Item,ArtWork,Accessories.Which are available in {birthday.favouriteColour}</Typography>
+            <Typography fontSize='13px'>{colorOption}</Typography>
           </Box>
           <hr />
           <Box>
             <Typography display='block' variant='subtitle2'>Favourite Food is <strong>{birthday.favouritefood}</strong></Typography>
-            <Typography variant='caption'>Surprise your friend with a delicious treat from their favorite food category {birthday.favouritefood}</Typography>
+            <Typography fontSize='13px'>{foodOption}</Typography>
           </Box>
           <hr />
           <Box>
             <Typography display='block' variant='subtitle2'>Favourite Place is <strong>{birthday.placeofinterest}</strong></Typography>
-            <Typography variant='caption'> A travel-related gift, such as a travel book, a scratch-off map, or a personalized travel journal, which will help in travelling to {birthday.placeofinterest}</Typography>
+            <Typography fontSize='13px'>  {placeOption}</Typography>
           </Box>
           <hr />
           <Box>

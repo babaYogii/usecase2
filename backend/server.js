@@ -3,6 +3,8 @@ const app=express();
 const cors=require('cors')
 const userRoute=require('./Router/userRoute');
 const employeeRoute=require('./Router/employeeRoutes')
+const path=require('path')
+
 const connectDb = require('./connection');
 
 
@@ -15,6 +17,13 @@ app.use(employeeRoute)
 connectDb();
 
 
+const build=path.join(__dirname+'/public')
+// path.join(__dirname+'/public')
+app.use(express.static(build))
+
+app.get('*',async(req,res)=>{
+    res.sendFile(path.join(build,'index.html'))
+})
 
 
 

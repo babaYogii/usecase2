@@ -257,3 +257,23 @@ exports.deleteEmployee = async (req, res) => {
        return res.status(403).json({message:'Error in deleting employee '});
   }
 }
+
+
+exports.findEmployee=async(req,res)=>{
+  const searchQuery = req.params.q; // Retrieve the search query from the URL parameter
+console.log(searchQuery)
+  try {
+    const searchResults = await EmployeeSchema.find({
+      $or: [
+        { employeename: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive pattern match on the name field
+        { employeeemail: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive pattern match on the email field
+        { employeeid: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive pattern match on the employeeid field
+      ],
+    });
+
+    res.status(200).json(searchResults);
+  }catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred while performing the search.' });
+  }
+}

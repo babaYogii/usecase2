@@ -26,3 +26,11 @@ export const getAllEmployee=async()=>{
     console.log(response);
     return response;
 }
+
+export const resetPassword=async({token,password,confirmPassword})=>{
+    // /reset-password/:token
+    // console.log(BaseUrl+`/reset-password/${token}`)
+    const response=await axios.put(BaseUrl+`/reset-password/${token}`,{password,confirmPassword})
+    return response;
+    
+}

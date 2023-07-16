@@ -28,6 +28,7 @@ const MainCard = ({ birthday, index }) => {
                 my: 2,
                 position: 'relative', // Add this to make the z-index work
                 backgroundColor: birthdayCardColor[Math.floor(Math.random() * birthdayCardColor.length)],
+               
             }}
         >
             <Box sx={{ minHeight: '240' }}>

@@ -1,48 +1,87 @@
-import { Avatar, Box, Grid } from '@mui/material';
+import { Avatar, Box, Grid, InputAdornment, TextField } from '@mui/material';
 import React from 'react';
-import { getAllEmployee } from '../../api/userApi';
-import { Card,  IconButton, Typography } from '@mui/material';
-import {  Delete } from '@mui/icons-material';
-import { DeleteEmployeeApi } from '../../api/adminApi';
+import { getAllEmployee } from '../../api/adminApi';
+import { Card, IconButton, Typography } from '@mui/material';
+import { Delete, Search } from '@mui/icons-material';
+import { DeleteEmployeeApi, searchEmployee } from '../../api/adminApi';
 
 const AllEmployee = ({ setAllemp, allemp }) => {
+
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+
     const fetchData = async () => {
         const response = await getAllEmployee();
         setAllemp(response.data);
     };
 
-    const DeleteEmployee=async(id)=>{
-        try{
-            const response =await DeleteEmployeeApi(id);
+    const DeleteEmployee = async (id) => {
+        try {
+            const response = await DeleteEmployeeApi(id);
             setAllemp(allemp.filter(emp => emp._id !== id));
             console.log(response);
-        }catch(error){
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const searchEmp = async (q) => {
+        console.log(q)
+        
+        try {
+            const response = await searchEmployee(q.replace(/[^a-zA-Z0-9]/g, ''));
+            console.log(response)
+            setAllemp(response.data);
+
+        } catch (error) {
+            alert(error);
             console.log(error)
         }
     }
 
     React.useEffect(() => {
         fetchData();
-    },[]);
+    }, []);
 
-    
 
+    const handleInputChange = (event) => {
+        const { value } = event.target;
+        console.log(value)
+        setSearchQuery(value);
+        searchEmp(value); // Call the searchEmp function whenever the value changes
+    };
 
 
     return (
         <Box
             sx={{
-                display: 'flex',
                 height: '100vh',
                 width: '80vw',
-                my: 10
+                my: 6
 
             }}
         >
+            <TextField
+                label="Search Employee"
+                value={searchQuery}
+                onChange={handleInputChange}
+                sx={{my:2,mt:0}}
+                InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                          <Search />
+                      </InputAdornment>
+                    ),
+                  }}
+            />
             {allemp && allemp.length > 0 && (
+
+
                 <Grid container spacing={4} >
+
                     {allemp.map((emp, index) => (
                         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+
                             <Card
                                 sx={{
                                     minWidth: 260,
@@ -56,10 +95,10 @@ const AllEmployee = ({ setAllemp, allemp }) => {
 
                                 }}
                             >
-                                <IconButton sx={{position:'absolute',right:10,top:8,}} onClick={()=>{
+                                <IconButton sx={{ position: 'absolute', right: 10, top: 8, }} onClick={() => {
                                     DeleteEmployee(emp._id)
                                 }}>
-                                <Delete sx={{color:'Amber.main'}} />
+                                    <Delete sx={{ color: 'Amber.main' }} />
                                 </IconButton>
                                 <Box className="upper-box" sx={{ p: 3, }}>
                                     <Avatar src={emp.profileimage} sx={{ width: 100, height: 100, border: '8px solid white', }} />

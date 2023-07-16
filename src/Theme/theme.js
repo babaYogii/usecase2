@@ -30,12 +30,12 @@ const theme=createTheme({
           },MuiTypography: {
             styleOverrides: {
               root: {
-                fontFamily: "'Rubik', sans-serif", // Change the font-family here
+                fontFamily:'sans-serif'// Change the font-family here
               },
             },
           },
           typography: {
-            fontFamily: 'Rubik, sans-serif',
+            fontFamily: 'sans-serif',
           },
     },
     components:{

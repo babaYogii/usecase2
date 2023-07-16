@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUpcomingBirthdays, getUpcomingAnniversary, getAllEmployee, deleteEmployee } = require('../Controller/employeeControlller');
+const { getUpcomingBirthdays, getUpcomingAnniversary, getAllEmployee, deleteEmployee, findEmployee } = require('../Controller/employeeControlller');
 const { requiresignin } = require('../Middleware/requiresSignin');
 const router = express.Router();
 // const employeeController = require('../Controller/employeeControlller');
@@ -14,5 +14,7 @@ router.get('/anniversaries/:days', requiresignin,getUpcomingAnniversary);
 router.get('/employee', getAllEmployee);
 
 router.delete('/employee/:id',requiresignin,deleteEmployee);
+
+router.get('/employee/:q',requiresignin,findEmployee);
 
 module.exports = router;
