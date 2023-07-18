@@ -27,8 +27,8 @@ pipeline {
         stage('backend') {
             steps {
                 dir('backend') {
-                    sh 'sudo npm install --legacy-peer-deps'
-                    sh 'sudo pm2 start server.js'
+                    sh 'npm install --legacy-peer-deps'
+                    sh 'pm2 start server.js'
                 }
             }
         }
