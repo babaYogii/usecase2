@@ -3,7 +3,7 @@ import React from 'react';
 import { keyframes,styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import image from '../Orange-Yellow.png'
-import logo from '../ExcelWishmaster'
+import logo from '../ExcelWishmaster.png'
 
 
 const fadeInAnimation = keyframes`
