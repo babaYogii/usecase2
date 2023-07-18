@@ -108,7 +108,7 @@ const LandingPage = () => {
             </Button>
             </Box>
             <Box sx={{position:'absolute',top:4,left:30, }} className='App-logo'>
-               <img src={logo}  alt='Logo' style={{width:130,borderRadius:'50%',}}/>
+               <img src={logo}  alt='Logo' style={{width:100,borderRadius:'50%',}}/>
             </Box>
         </Box>
     );

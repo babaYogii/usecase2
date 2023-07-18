@@ -17,9 +17,11 @@ import logo from '../../ExcelWishmaster.png';
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     boxShadow: theme.shadows[3], // Adjust the shadow value as needed
-
+   display:'flex',
+   alignItems:'center',
+   justifyContent:'center'
   },
-  
+
 }));
 
 
@@ -110,9 +112,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
   const drawer = (
     <div >
       <Toolbar className={classes.toolbar} >
-        <img src={logo} alt='WishMaster' style={{ width: "100px", height: '70px', marginLeft: '-23px', marginRight: '-12px' }} />
-        <Typography variant="h6" component="h1"  >{"WishMaster"}
-        </Typography>
+        <img src={logo} alt='WishMaster' style={{ width: 80, marginLeft: '-23px', marginRight: '-12px' }} />
       </Toolbar>
       <Divider />
 
