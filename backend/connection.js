@@ -1,6 +1,8 @@
 const mongoose=require('mongoose')
+require("dotenv").config()
 
-const url="mongodb://yogesh:a8HF0dbf8kmOEFsmxdmc0Xt9V31o3kabLUzbeQluxbJxUO4AgLIHbP4ZMP5wqtD2VW4gh2BGe9MfACDboEGzPw==@yogesh.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@yogesh@"
+
+const url=process.env.DB_URL;
 // const url="mongodb+srv://yogeshkodlinge:Yogesh123@cluster0.ymuefl6.mongodb.net/";
 
 
