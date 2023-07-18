@@ -3,6 +3,7 @@ import React from 'react';
 import { keyframes,styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import image from '../Orange-Yellow.png'
+import logo from '../ExcelWishmaster'
 
 
 const fadeInAnimation = keyframes`
@@ -107,7 +108,7 @@ const LandingPage = () => {
             </Button>
             </Box>
             <Box sx={{position:'absolute',top:4,left:30, }} className='App-logo'>
-               <img src={'./ExcelWishMaster.png'}  alt='Logo' style={{width:130,borderRadius:'50%',}}/>
+               <img src={logo}  alt='Logo' style={{width:130,borderRadius:'50%',}}/>
             </Box>
         </Box>
     );

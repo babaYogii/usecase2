@@ -12,13 +12,14 @@ import { Menu, Inbox, Mail } from '@mui/icons-material';
 import { AppBar,  Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { getUpcomingAnniversary, getUpcomingBirthdays } from '../../api/eventApi';
 import { useNavigate } from 'react-router-dom';
-
+import logo from '../../ExcelWishmaster.png';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     boxShadow: theme.shadows[3], // Adjust the shadow value as needed
 
   },
+  
 }));
 
 
@@ -109,7 +110,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
   const drawer = (
     <div >
       <Toolbar className={classes.toolbar} >
-        <img src="../../ExcelWishMaster.png" alt='WishMaster' style={{ width: "100px", height: '70px', marginLeft: '-23px', marginRight: '-12px' }} />
+        <img src={logo} alt='WishMaster' style={{ width: "100px", height: '70px', marginLeft: '-23px', marginRight: '-12px' }} />
         <Typography variant="h6" component="h1"  >{"WishMaster"}
         </Typography>
       </Toolbar>
