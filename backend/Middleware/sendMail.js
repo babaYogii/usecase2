@@ -7,7 +7,7 @@ exports.sendMail= async (req,res)=>{
         const token = jwt.sign({email:req.body.email},"json",{expiresIn:'10m'})
         const user=await User.findOne({email:req.body.email});
         if(!user){return res.status(400).json({message:"no user found with given email"})}
-        const resetPasswordUrl=`http://20.204.43.67/reset-password/${token}`
+        const resetPasswordUrl=`http://20.204.43.67:4000/reset-password/${token}`
         
         // Create a transporter object
         const transporter = nodeMailer.createTransport({

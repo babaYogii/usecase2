@@ -7,9 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import CakeIcon from '@mui/icons-material/Cake';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { makeStyles } from '@mui/styles';
 import { Menu, Inbox, Mail } from '@mui/icons-material';
-import { AppBar,  Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { AppBar,  Box,  Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { getUpcomingAnniversary, getUpcomingBirthdays } from '../../api/eventApi';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../ExcelWishmaster.png';
@@ -183,11 +184,17 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
     </div>
   );
 
+  const handelLogout = () => {
+    localStorage.clear();
+    navigate('/signin');
+
+  }
+
   return (
     <div >
      
           {isSmallScreen && (
-             <AppBar sx={{ backgroundColor: 'white', height: "70.2px" }}>
+             <AppBar sx={{ backgroundColor: 'white', height: "70.2px", }}>
     
 
 
@@ -201,6 +208,14 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
             >
               <Menu />
             </IconButton>
+            <Box sx={{
+       
+      }}>
+        <IconButton sx={{   zIndex: 100,ml:22 }} onClick={handelLogout}>
+          <LogoutIcon sx={{ mx: 1 }} />Logout
+        </IconButton>
+
+      </Box>
             </Toolbar>
       </AppBar>
           )}

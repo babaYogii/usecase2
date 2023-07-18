@@ -76,7 +76,7 @@ const MainComponent = ({ birthday, anniversary }) => {
 {/* ---------------------------------------Logout Functionality completed-------------------------------------------------------------------------         */}
         
 {/* ---------------------------------------Card for Birthday started-------------------------------------------------------------------------         */}
-          <Typography variant='h6' mx={2} my={1.5} >
+          <Typography variant='h6' mx={2} mt={5} >
             {("Birthdays").toUpperCase()}
           </Typography>
         <Box sx={{
@@ -93,7 +93,7 @@ const MainComponent = ({ birthday, anniversary }) => {
                   <MainCard birthday={birthday} index={index} key={index} />
                 );
               }) :
-              <Typography variant='h3' sx={{ width: '100%' }} align='center'>" No-upcoming Birthdays "</Typography>
+              <Typography variant='h3' sx={{ width: '100%',fontSize:'32px',mt:10 }} align='center'>" No-upcoming Birthdays "</Typography>
 
             }
           </Box>
@@ -114,7 +114,7 @@ const MainComponent = ({ birthday, anniversary }) => {
                 <MainWorkAniversaryCard birthday={anniversary} index={index} key={index} />
               );
             }) :
-              <Typography variant='h3' sx={{ width: '100%' }} align='center'>" No-upcoming work Anniversary "</Typography>
+              <Typography variant='h3' sx={{ width: '100%',fontSize:'32px',mt:10 }} align='center'>" No-upcoming work Anniversary "</Typography>
             }
           </Box>
         </Box>

@@ -58,7 +58,7 @@ const AllEmployee = ({ setAllemp, allemp }) => {
             sx={{
                 height: '100vh',
                 width: '80vw',
-                my: 6
+                my: 10
 
             }}
         >
