@@ -28,7 +28,6 @@ pipeline {
             steps {
                 dir('backend') {
                     sh 'npm install --legacy-peer-deps'
-                    sh 'npm install -g nodemon'
                     sh 'npm start'
                 }
             }
