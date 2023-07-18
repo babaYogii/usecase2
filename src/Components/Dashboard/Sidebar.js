@@ -96,7 +96,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
   const handelAnniversaryClick = async (urlString) => {
     const response = await getUpcomingAnniversary(`${urlString}`);
     setAnniversary(response.data);
-    console.log(response);
+    // console.log(response);
   }
 
   const menuItems = [

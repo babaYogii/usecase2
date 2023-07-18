@@ -13,7 +13,7 @@ import ResetPassword from './Components/User/ResetPassword';
 import ErrorPage from './Components/ErrorPage';
 
 function App() {
-  console.log("Check rendering")
+  // console.log("Check rendering")
   return (
     <BR>
       <ThemeProvider theme={theme}>

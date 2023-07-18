@@ -26,27 +26,28 @@ const AllEmployee = ({ setAllemp, allemp }) => {
     }
 
     const searchEmp = async (q) => {
-        console.log(q)
+        // console.log(q)
         
         try {
             const response = await searchEmployee(q.replace(/[^a-zA-Z0-9]/g, ''));
-            console.log(response)
+            // console.log(response)
             setAllemp(response.data);
 
         } catch (error) {
             alert(error);
-            console.log(error)
+            // console.log(error)
         }
     }
 
     React.useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, []);
 
 
     const handleInputChange = (event) => {
         const { value } = event.target;
-        console.log(value)
+        // console.log(value)
         setSearchQuery(value);
         searchEmp(value); // Call the searchEmp function whenever the value changes
     };

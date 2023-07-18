@@ -135,13 +135,13 @@ const Signup = () => {
         
         try {
             const response = await signup({ ...userData });
-            console.log(response.data);
+            // console.log(response.data);
             if (response.status === 201) {
                 navigate('/signin')
             }
         } catch (e) {
             alert(e.response.data.message)
-            console.log(e.response.data.message)
+            // console.log(e.response.data.message)
             // console.log(error)
         }
     }

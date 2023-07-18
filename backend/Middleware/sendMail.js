@@ -7,9 +7,8 @@ exports.sendMail= async (req,res)=>{
         const token = jwt.sign({email:req.body.email},"json",{expiresIn:'10m'})
         const user=await User.findOne({email:req.body.email});
         if(!user){return res.status(400).json({message:"no user found with given email"})}
-        const resetPasswordUrl=`http://localhost:3000/reset-password/${token}`
+        const resetPasswordUrl=`http://20.204.43.67/reset-password/${token}`
         
-        console.log(resetPasswordUrl)
         // Create a transporter object
         const transporter = nodeMailer.createTransport({
           // Set up your email service and authentication details
@@ -96,11 +95,9 @@ exports.sendMail= async (req,res)=>{
         
         // Send the email
         let info=await transporter.sendMail(mailOptions);
-        console.log("Email sent successfully"+info);  
         return res.status(201).json({message:'Email sent succesfully'})   
        
       } catch (error) {
-        console.error('Error sending email:', error);
         res.status(500).json({message:'Something went wrong while sending email'});
         // info.mes
       }

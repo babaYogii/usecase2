@@ -20,7 +20,6 @@ exports.signUp=async(req,res)=>{
   
       return res.status(201).json({ message: "User created successfully!" });
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ message: "Internal server error" });
     }
   
@@ -31,7 +30,6 @@ exports.signUp=async(req,res)=>{
 
       const {firstName,lastName,password,email,confirmPassword}=req.body;
       let{role,currentUserRole}=req.body;
-      //  console.log(role)
 
       if(typeof role=='undefined'|| typeof currentUserRole === 'undefined'){
          return res.status(400).json({message:'Missing some fields'});
@@ -54,7 +52,6 @@ exports.signUp=async(req,res)=>{
          return res.status(201).json({ message: "User created successfully!" });
       
        } catch (error) {
-         console.error(error);
          return res.status(500).json({ message: "Internal server error" });
        }
       }else{
@@ -74,7 +71,6 @@ exports.resetPassword=async(req,res)=>{
    
    if(validateToken){
       const userFound = await User.findOne({ email: bodyemail });
-        console.log(userFound.password);
         if(userFound.password===password){
          return res.status(400).json({message:"old password and new password are same"})
         }
@@ -102,7 +98,6 @@ try {
 
 
   const userFound= await User.findOne({ email: req.body.email })
-  console.log(userFound);
    
        if (userFound) {
 
@@ -124,7 +119,6 @@ try {
        }
       //  userFound = null;
       } catch (error) {
-         console.error(error);
          return res.status(500).json({ message: "Internal server error" });
       }
   

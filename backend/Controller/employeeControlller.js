@@ -70,7 +70,6 @@ exports.uploadXLsxFile = async (req, res) => {
       throw new Error('Invalid file type');
     }
   } catch (error) {
-    // console.error('Error uploading file and extracting data:', error);
     res.status(500).json({ error: 'Error uploading file and extracting data' });
   }
 
@@ -114,11 +113,9 @@ exports.getUpcomingBirthdays = async (req, res) => {
   try {
     const days = req.params.days;
     const today = new Date();
-    // today.setDate(31);
 
 
-    const employee = await EmployeeSchema.find().sort({ dob: 1 });
-
+    const employee = await EmployeeSchema.find();
 
 
     const ans = [];
@@ -182,7 +179,7 @@ exports.getUpcomingAnniversary = async (req, res) => {
     const days = req.params.days;
     const today = new Date();
 
-    const employee = await EmployeeSchema.find().sort({ dob: 1 });
+    const employee = await EmployeeSchema.find();
 
     const ans = [];
 
@@ -235,7 +232,7 @@ exports.getUpcomingAnniversary = async (req, res) => {
 exports.getAllEmployee = async (req, res) => {
 
   try {
-    const employee = await EmployeeSchema.find().sort({ employeeid: 1 });
+    const employee = await EmployeeSchema.find();
     return res.status(200).json(employee);
   } catch (error) {
     console.log(error)
@@ -261,7 +258,6 @@ exports.deleteEmployee = async (req, res) => {
 
 exports.findEmployee=async(req,res)=>{
   const searchQuery = req.params.q; // Retrieve the search query from the URL parameter
-console.log(searchQuery)
   try {
     const searchResults = await EmployeeSchema.find({
       $or: [

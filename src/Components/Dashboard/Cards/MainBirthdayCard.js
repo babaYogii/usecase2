@@ -42,16 +42,22 @@ const MainCard = ({ birthday, index }) => {
             </Box>
 
             <Box sx={{
-                position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1, backdropFilter: 'blur(7px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1,backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',transform:'translateY(30%)',my:0.1,'&:hover': {
+                    transform: 'translateY(0%)',
+                    transition:'40ms ease-in-out',
+                    backdropFilter: 'blur(3px)',
+                    
+                  },
             }}>
-                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontWeight: 500, fontSize: '16px' }}>{birthday.employeename}</Typography>
+                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontSize: '16px' }}>{birthday.employeename}</Typography>
                 <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                    <Typography variant="caption" sx={{ mx: 1, my: 0, color: 'black' }}>{birthday.profession}</Typography>
+                    <Typography  sx={{ mx: 1, color: 'black',fontSize:"11.2px" }}>{birthday.profession}</Typography>
                     <IconButton  onClick={()=>{handleModal()}}>
                         <ArrowForward fontSize="small" color="black" />
                     </IconButton>
                 </Box>
+                    <Typography  sx={{ mx: 1,  color: 'black' }}>{new Date(birthday.dob).toLocaleString('en-US', { day: 'numeric', month: 'short' })}</Typography>
             </Box>
         <BasicBirthdayModal  open={open} handleClose={handleClose} birthday={birthday} />
        

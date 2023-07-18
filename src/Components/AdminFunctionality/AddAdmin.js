@@ -26,9 +26,9 @@ const AddAdmin = () => {
     
     const handleSubmit =async (e) => {
         e.preventDefault();
-        console.log('button clicked');
-        console.log(userData);
-        console.log(selectedRole);
+        // console.log('button clicked');
+        // console.log(userData);
+        // console.log(selectedRole);
         try{
             const response=await AddUser({...userData,role:selectedRole});
             alert("Success")
@@ -37,7 +37,7 @@ const AddAdmin = () => {
         }catch(error){
             alert(error.response.data.message)
             
-            console.log(error)
+            // console.log(error)
         }
         
 

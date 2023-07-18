@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 
-
-const url="mongodb+srv://yogeshkodlinge:Yogesh123@cluster0.ymuefl6.mongodb.net/";
+const url="mongodb://yogesh:a8HF0dbf8kmOEFsmxdmc0Xt9V31o3kabLUzbeQluxbJxUO4AgLIHbP4ZMP5wqtD2VW4gh2BGe9MfACDboEGzPw==@yogesh.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@yogesh@"
+// const url="mongodb+srv://yogeshkodlinge:Yogesh123@cluster0.ymuefl6.mongodb.net/";
 
 
 const connectDb=async(req,res)=>

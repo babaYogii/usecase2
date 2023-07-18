@@ -66,7 +66,7 @@ const Signin = () => {
       alert("Success")
       navigate('/')
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       if (error.status === 400) {
         alert(error.response.data.message);
       } else {
@@ -74,7 +74,7 @@ const Signin = () => {
       }
 
     }
-    console.log(user)
+    // console.log(user)
   };
 
   return (
@@ -137,7 +137,7 @@ const Signin = () => {
           </form>
           <Box sx={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',mt:1}}>
 
-            <Typography component='a' href="/forgot-password" sx={{align:'center'}} variant='caption'>Forgot Password</Typography>
+            <Typography component='a' href="/forgot-password" style={{textDecoration:'none'}} sx={{align:'center'}} variant='caption'>Forgot Password</Typography>
           </Box>
         </Box>
         <Hidden mdDown>

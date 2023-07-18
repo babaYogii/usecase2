@@ -50,12 +50,22 @@ const MainWorkAniversaryCard = ({ birthday, index }) => {
             </Box>
 
             <Box sx={{
-                position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1, backdropFilter: 'blur(7px)',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1, backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',transform:"translateY(30%)",'&:hover':{
+                    transform:'translateY(0%)',transition:'40ms ease-in-out',
+                }
             }}>
-                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontWeight: 500, fontSize: '16px', m: 0, p: 0 }}>{birthday.employeename}</Typography>
+                <Typography variant="body1" sx={{ color: 'black', mx: 1, fontSize: '16px',  p: 0 }}>{birthday.employeename}</Typography>
+               
+                <Box sx={{ alignItems: 'center', display: 'flex' }}>
+                    <Typography  sx={{ mx: 1, color: 'black',fontSize:"11.2px" }}>{birthday.profession}</Typography>
+                    <IconButton  onClick={()=>{handleModal()}}>
+                        <ArrowForward fontSize="small" color="black" />
+                    </IconButton>
+                </Box>
+               
                 <Typography variant='caption' display='flex' alignItems='center'>
-                    <div style={{ flex: '1' }}>
+                    <div style={{ flex: '1'}}>
                         {Array(trophyCount).fill().map((_, index) => (
                             (expanded || index < maxTrophyCount) && (
                                 <EmojiEventsIcon sx={{ fontSize: '14px', m: 0, p: 0, color: '#f4ae00' }} key={index} />
@@ -76,12 +86,7 @@ const MainWorkAniversaryCard = ({ birthday, index }) => {
                 </Typography>
 
 
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography  sx={{ mx: 1, my: 0, color: 'black', display: 'inline-block',fontSize:'11px' }}>{birthday.profession}</Typography>
-                    <IconButton onClick={() => { handleModal() }}>
-                        <ArrowForward fontSize="small" color="black" sx={{ fontSize: '14px', m: 0, p: 0 }} />
-                    </IconButton>
-                </Box>
+               
             </Box>
             <BasicAniversaryModal open={open} handleClose={handleClose} birthday={birthday} />
 
