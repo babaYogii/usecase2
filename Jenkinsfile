@@ -13,13 +13,13 @@ pipeline {
         }
         stage('Client') {
             steps {
-                {
+                script {
                     sh 'npm install --legacy-peer-deps'
                     sh 'npm run build'
                 }
             }
         }
-                stage('Copy to Server') {
+        stage('Copy to Server') {
             steps {
                 sh 'rsync -avz /build/ backend/public/'
             }
@@ -32,8 +32,5 @@ pipeline {
                 }
             }
         }
-
-       
     }
 }
-//restart
