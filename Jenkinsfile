@@ -26,9 +26,15 @@ pipeline {
         }
         stage('backend') {
             steps {
-                dir('backend') {
-                    sh 'npm install --legacy-peer-deps'
-                    sh 'pm2 start server.js'
+                script {
+                    def pm2Status = sh(returnStatus: true, script: 'pm2 list | grep server.js | wc -l').trim()
+                    if (pm2Status.toInteger() == 1) {
+                        echo "PM2 process 'server.js' is already running. Reloading..."
+                        sh 'pm2 reload server.js'
+                    } else {
+                        echo "PM2 process 'server.js' is not running. Starting..."
+                        sh 'pm2 start server.js'
+                    }
                 }
             }
         }
