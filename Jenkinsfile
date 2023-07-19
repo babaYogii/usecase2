@@ -28,14 +28,8 @@ pipeline {
             steps {
                 script {
                     def serverJsPath = "${WORKSPACE}/backend/server.js"
-                    def pm2Status = sh(script: "pm2 list | grep ${serverJsPath} | wc -l", returnStdout: true).trim()
-                    if (pm2Status.toInteger() == 1) {
                         echo "PM2 process 'server.js' is already running. Reloading..."
                         sh "pm2 reload ${serverJsPath}"
-                    } else {
-                        echo "PM2 process 'server.js' is not running. Starting..."
-                        sh "pm2 start ${serverJsPath}"
-                    }
                 }
             }
         }

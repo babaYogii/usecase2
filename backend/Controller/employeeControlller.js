@@ -18,27 +18,41 @@ exports.uploadXLsxFile = async (req, res) => {
         dateNF: 'yyyy/mm/dd',
         cellDates: true,
       });
-      console.log(jsonData);
-      try {
-        const requiredColumns = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest', 'profileimage', 'profession'];
-        const fileColumns = Object.keys(jsonData[0]);
-
-        const hasAllColumns = requiredColumns.every((column) => fileColumns.includes(column));
-        if (!hasAllColumns) {
-          return res.status(400).json({ message: "Wrong file does not contain all data" })
-
-        }
-
-      } catch (e) {
-        console.log(e);
+      
+      const requiredFields = ['employeeid', 'employeename', 'employeeemail', 'dob', 'dateofjoining', 'favouriteColour', 'favouritefood', 'placeofinterest', 'profileimage', 'profession'];
+      const missingFields = requiredFields.filter((field) => !jsonData[0].hasOwnProperty(field));
+      if (missingFields.length > 0) {
+        return res.status(400).json({ message: `Required fields are missing: ${missingFields.join(', ')}` });
       }
+      
+      const hasEmptyField = jsonData.some((item) => {
+        return Object.values(item).some((value) => {
+          return value === null || value === '';
+        });
+      });
+      if (hasEmptyField) {
+        return res.status(400).json({ message: "Incomplete data. Some fields are empty." });
+      }
+
+      // Check for missing values in all columns
+      const missingValues = [];
+      jsonData.forEach((item, index) => {
+        const missingColumns = requiredFields.filter((field) => !item[field]);
+        if (missingColumns.length > 0) {
+          missingValues.push({ row: index + 1, missingColumns });
+        }
+      });
+
+      if (missingValues.length > 0) {
+        return res.status(400).json({ message: "Missing values in some columns", missingValues });
+      }
+
       const data = jsonData.map((item) => {
         // Validate date format for 'dob' and 'dateofjoining' columns
         const dob = moment.utc(item.dob, 'YYYY/MM/DD').format('YYYY-MM-DD');
         const dateofjoining = moment.utc(item.dateofjoining, 'YYYY/MM/DD').format('YYYY-MM-DD');
         if (!moment(dob, 'YYYY-MM-DD', true).isValid() || !moment(dateofjoining, 'YYYY-MM-DD', true).isValid()) {
           throw new Error('Invalid date format in the XLSX file');
-
         }
 
         return {
@@ -61,8 +75,9 @@ exports.uploadXLsxFile = async (req, res) => {
         return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
       }
 
-
-      EmployeeSchema.insertMany(data);
+      // Filter out any row that has an empty value before inserting data
+      const validData = data.filter((item) => !Object.values(item).some((value) => value === null || value === ''));
+      EmployeeSchema.insertMany(validData);
 
       await emptyDir('./uploads');
       res.status(200).json({ message: 'File uploaded and data extracted successfully' });
@@ -72,9 +87,9 @@ exports.uploadXLsxFile = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Error uploading file and extracting data' });
   }
-
-
 };
+
+
 
 
 
