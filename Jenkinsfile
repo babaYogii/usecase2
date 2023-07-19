@@ -54,14 +54,14 @@ pipeline {
 //         }
 //     }
 // }    
-   // Start the backend server using PM2
-        stage('Start Server') {
-            steps {
-                dir('backend') {
-                    sh 'pm2 start server.js -f'
-                    echo 'Application started at your assigned port'
-                }
-            }
+   stage('Start Server') {
+    steps {
+        dir('backend') {
+            sh 'pm2 start server.js -f'
+            echo 'Application started at your assigned port'
         }
+    }
+}
+
     }
 }
