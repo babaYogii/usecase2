@@ -34,7 +34,7 @@ pipeline {
         stage('start server') {
             steps {
                 dir('backend') {
-                    sh 'pm2 start server.js'
+                    sh 'pm2 restart server.js'
                 }
             }
         }
