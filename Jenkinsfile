@@ -44,7 +44,8 @@ pipeline {
         stage('Start Server') {
             steps {
                 dir('backend') {  
-                sh 'node server.js'
+                sh 'npm install pm2'
+                sh 'pm2 start server.js'
                 }
              }
         }
