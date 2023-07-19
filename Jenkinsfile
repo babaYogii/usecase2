@@ -41,7 +41,7 @@ pipeline {
         }
         //now at last we are ready to start our application
 // Check if port 4000 is already allocated and stop the process using the port
-stage('Check Port 4000') {
+// stage('Check Port 4000') {
 //     steps {
 //         script {
 //             def portInUse = sh(script: "lsof -t -i:4000", returnStatus: true)
