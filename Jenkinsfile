@@ -45,7 +45,7 @@ pipeline {
             steps {
                 dir('backend') {  
                 sh 'npm install pm2'
-                sh 'npx pm2 restart server.js'
+                sh 'npx pm2 start server.js'
                 }
              }
         }
