@@ -57,6 +57,7 @@ pipeline {
    stage('Start Server') {
     steps {
         dir('backend') {
+            sh 'npm install -g pm2'
             sh 'pm2 start server.js'
             echo 'Application started at your assigned port'
         }
