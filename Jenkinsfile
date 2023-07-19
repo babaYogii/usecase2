@@ -22,6 +22,7 @@ pipeline {
         stage('Copy to Server') {
             steps {
                 sh 'rsync -avz build/ backend/public/'
+                sh 'npm install --legacy-peer-deps'
             }
         }
         stage('backend') {
@@ -30,7 +31,6 @@ pipeline {
                 def serverJsPath = "${WORKSPACE}/backend/server.js"
                 
                     echo "Starting PM2 process 'server.js'..."
-                    sh 'npm install --legacy-peer-deps'
                     sh "pm2 start ${serverJsPath}"
             }
             }
