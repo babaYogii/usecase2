@@ -9,7 +9,7 @@ pipeline {
         //This stage check's for git and pulls all the required code
         stage('Checkout') {
             steps {
-                echo "Checking scm for Jenkinsfile"
+                
                 checkout scm
             }
         }
@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh 'npm install --legacy-peer-deps'
                     sh 'npm run build'
-                    echo 'Frontend package installation completed'
+                    
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Copy to Server') {
             steps {
                 sh 'rsync -avz build/ backend/public/'
-                echo 'copied build folder to bakcend directory'
+               
             }
         }
        //After receving build folder now its time for installing backend dependencies
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 dir('backend') {
                     sh 'npm install --legacy-peer-deps'
-                    echo 'Backend package installation completed'
+                    
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
     
         stage('Start Server') {
             steps {
-                dir('backend') {
+                dir('/var/lib/jenkins/workspace/usecase2_main/backend') {
                 sh 'pm2 start server.js'
                 }
              }
