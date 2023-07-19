@@ -43,7 +43,7 @@ pipeline {
     
         stage('Start Server') {
             steps {
-                dir('/var/lib/jenkins/workspace/usecase2_main/backend') {
+                dir('/var/lib/jenkins/workspace/usecase2_main/backend') {  
                 sh 'pm2 start server.js'
                 }
              }
