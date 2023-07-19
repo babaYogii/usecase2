@@ -26,21 +26,23 @@ pipeline {
         }
         stage('backend') {
             steps {
-                 script {
-                    def serverJsPath = "${WORKSPACE}/backend/server.js"
-                    def pm2Status = sh(returnStatus: true, script: "pm2 list | grep server.js | wc -l").trim()
-                    if (pm2Status.toInteger() == 1) {
-                        echo "PM2 process 'server.js' is already running. Stopping..."
-                        sh "pm2 stop server.js"
-                        echo "Starting PM2 process 'server.js'..."
-                        sh "pm2 start ${serverJsPath}"
-                    } else {
-                        echo "PM2 process 'server.js' is not running. Starting..."
-                        sh "pm2 start ${serverJsPath}"
-                    }
+                  script {
+                def serverJsPath = "${WORKSPACE}/backend/server.js"
+                def pm2Status = sh(returnStatus: true, script: "pm2 list | grep server.js | wc -l")
+                def pm2ProcessCount = pm2Status.toInteger()
 
-                    // Wait for the application to start
-                    sleep 30 // You may adjust the waiting time based on your application startup time
+                if (pm2ProcessCount == 1) {
+                    echo "PM2 process 'server.js' is already running. Stopping..."
+                    sh "pm2 stop server.js"
+                    echo "Starting PM2 process 'server.js'..."
+                    sh "pm2 start ${serverJsPath}"
+                } else {
+                    echo "PM2 process 'server.js' is not running. Starting..."
+                    sh "pm2 start ${serverJsPath}"
+                }
+
+                // Wait for the application to start
+                sleep 30 // You may adjust the waiting time based on your application startup time
                 }
             }
         }
