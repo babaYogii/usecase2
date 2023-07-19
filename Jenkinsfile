@@ -58,7 +58,6 @@ pipeline {
     steps {
         dir('backend') {
             sh 'pm2 start server.js'
-            echo 'Application started at your assigned port'
         }
     }
 }
