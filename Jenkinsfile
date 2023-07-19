@@ -40,14 +40,12 @@ pipeline {
             }
         }
         //now at last we are ready to start our application
-      // Check if port 4000 is already allocated and stop the process using the port
-        // Check if port 4000 is already allocated and stop the process using the port
 // Check if port 4000 is already allocated and stop the process using the port
 stage('Check Port 4000') {
     steps {
         script {
             def portInUse = sh(script: "lsof -t -i:4000", returnStatus: true)
-            if (portInUse.trim()) {
+            if (portInUse) {
                 echo "Port 4000 is already allocated. Stopping the existing process."
                 sh "kill -9 ${portInUse}" // Terminate the process using port 4000
             } else {
@@ -55,7 +53,8 @@ stage('Check Port 4000') {
             }
         }
     }
-}        // Start the backend server using PM2
+}    
+   // Start the backend server using PM2
         stage('Start Server') {
             steps {
                 dir('backend') {
