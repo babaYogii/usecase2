@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        DB_URL = credentials('DB_URL')        
-    }
+   
 
     stages {
         //This stage check's for git and pulls all the required code
@@ -46,6 +44,7 @@ pipeline {
                 dir('backend') {  
                 sh 'npm install pm2'
                 sh 'npx pm2 start server.js'
+                // sh 'node server.js'
                 }
              }
         }
