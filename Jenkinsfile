@@ -41,16 +41,16 @@ pipeline {
         }
         //now at last we are ready to start our application
       // Check if port 4000 is already allocated and stop the process using the port
-        stage('Check Port 4000') {
-            steps {
-             script {
-                def portInUse = sh(script: "netstat -ano | findstr :4000", returnStatus: true)
-                if (portInUse == 0) {
+stage('Check Port 4000') {
+    steps {
+        script {
+            def portInUse = sh(script: "netstat -ano | findstr :4000", returnStatus: true)
+            if (portInUse == 0) {
                 echo "Port 4000 is already allocated. Stopping the existing process."
-                sh "kill -9 $$(lsof -t -i:4000)" // Terminate the process using port 4000
-                } else {
+                sh 'kill -9 $(lsof -t -i:4000)' // Terminate the process using port 4000
+            } else {
                 echo "Port 4000 is available. Starting the backend server."
-                }
+            }
         }
     }
 }
