@@ -30,7 +30,7 @@ pipeline {
                 def serverJsPath = "${WORKSPACE}/backend/server.js"
                 
                     echo "Starting PM2 process 'server.js'..."
-                    sh "pm2 start ${serverJsPath}"
+                    sh "pm2 start server.js"
             }
             }
         }
