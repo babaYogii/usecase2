@@ -30,6 +30,7 @@ pipeline {
                 def serverJsPath = "${WORKSPACE}/backend/server.js"
                 
                     echo "Starting PM2 process 'server.js'..."
+                    sh 'npm install --legacy-peer-deps'
                     sh "pm2 start ${serverJsPath}"
             }
             }
