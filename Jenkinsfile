@@ -44,7 +44,7 @@ pipeline {
         stage('Start Server') {
             steps {
                 dir('backend') {  
-                sh 'pm2 start server.js --uid yogesh --gid yogesh'
+                sh 'pm2 start server.js'
                 }
              }
         }
