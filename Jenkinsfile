@@ -43,7 +43,7 @@ pipeline {
             steps {
                 dir('backend') {  
                 
-                 sh 'pm2 start server.js --watch'
+                 sh 'pm2 restart server.js --watch'
                 }
              }
         }
