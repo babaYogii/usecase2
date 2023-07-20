@@ -82,7 +82,7 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
             Know More
           </Typography>
           <Typography variant='subtitle1' sx={{ mt: 2 }}>
-            Palnning a surprise for <strong>{birthday.employeename} ?</strong>,here are few suggestions
+            Planning a surprise for <strong>{birthday.employeename} ?</strong>,here are few suggestions
           </Typography>
           <hr />
           <Box>
