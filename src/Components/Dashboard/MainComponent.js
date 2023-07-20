@@ -69,7 +69,7 @@ const MainComponent = ({ birthday, anniversary }) => {
     <div>
 {/* ---------------------------------------Logout Functionality started-------------------------------------------------------------------------         */}
 
-      <Box sx={{ position: 'absolute', top: 40, width: '84.5%',backgroundPosition: 'center',
+      <Box sx={{ position: 'absolute', top: 37, width: '84.3%',backgroundPosition: 'center',
     backgroundSize: 'cover',}}>
         
 

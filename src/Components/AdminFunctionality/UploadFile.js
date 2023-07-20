@@ -40,11 +40,11 @@ const UploadFile = () => {
                 .then(response => {
                     alert('File uploaded successfully')
                     navigate('/dashboard');
-                    // console.log('File uploaded successfully');
+                    console.log('File uploaded successfully');
                 })
                 .catch(error => {
                     console.error('Error uploading file:', error);
-                    alert('File contains incomplete/repeated Data/Date format is not in YYYY-MM-DD')
+                    alert(error.data.message);
                 });
         } else {
             alert('File type not supported')
