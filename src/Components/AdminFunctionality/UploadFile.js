@@ -44,6 +44,7 @@ const UploadFile = () => {
                 })
                 .catch(error => {
                     console.error('Error uploading file:', error);
+                    alert("Error in file")
                     alert(error.data.message);
                 });
         } else {
