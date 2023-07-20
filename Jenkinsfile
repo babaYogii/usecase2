@@ -43,7 +43,7 @@ pipeline {
             steps {
                 dir('backend') {  
                 
-                 sh 'forever start server.js'
+                 sh 'pm2 start server.js'
                 }
              }
         }
