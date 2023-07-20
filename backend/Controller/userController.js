@@ -102,7 +102,7 @@ try {
        if (userFound) {
 
            if (userFound.password === req.body.password) {
-               const token = jwt.sign({ _id: userFound._id, role: userFound.role },'json', { expiresIn: '1d' })
+               const token = jwt.sign({ _id: userFound._id, role: userFound.role },'json', { expiresIn: '4d' })
                const { _id, firstName, lastName, email, fullName,role } = userFound;
                if (token) {
                    res.status(200).json({
