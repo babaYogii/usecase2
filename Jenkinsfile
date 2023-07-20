@@ -42,8 +42,8 @@ pipeline {
         stage('Start Server') {
             steps {
                 dir('backend') {  
-                sh 'npm start server.js'
-                // sh 'node server.js'
+                 sh 'npm install forever -g'
+                 sh 'forever start server.js'
                 }
              }
         }
