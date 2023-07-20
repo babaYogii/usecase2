@@ -25,14 +25,7 @@ exports.uploadXLsxFile = async (req, res) => {
         return res.status(400).json({ message: `Required fields are missing: ${missingFields.join(', ')}` });
       }
       
-      const hasEmptyField = jsonData.some((item) => {
-        return Object.values(item).some((value) => {
-          return value === null || value === '';
-        });
-      });
-      if (hasEmptyField) {
-        return res.status(400).json({ message: "Incomplete data. Some fields are empty." });
-      }
+   
 
       // Check for missing values in all columns
       const missingValues = [];
@@ -75,9 +68,7 @@ exports.uploadXLsxFile = async (req, res) => {
         return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
       }
 
-      // Filter out any row that has an empty value before inserting data
-      const validData = data.filter((item) => !Object.values(item).some((value) => value === null || value === ''));
-      EmployeeSchema.insertMany(validData);
+      EmployeeSchema.insertMany(data);
 
       await emptyDir('./uploads');
       res.status(200).json({ message: 'File uploaded and data extracted successfully' });
@@ -85,7 +76,7 @@ exports.uploadXLsxFile = async (req, res) => {
       throw new Error('Invalid file type');
     }
   } catch (error) {
-    res.status(500).json({ error: 'Error uploading file and extracting data' });
+    res.status(500).json({ error: 'Error uploading file and extracting data',error });
   }
 };
 
