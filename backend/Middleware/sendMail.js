@@ -85,7 +85,7 @@ exports.sendMail= async (req,res)=>{
                 <a href="${resetPasswordUrl}">Reset Password</a>
                 <p>If you don’t use this link within 10 minutes, it will expire. To get a new password reset link, visit: WishMaster </p>
                  <div>Thanks,</div>
-                 <div>Team WishMaster</div>
+                 <div><a href="http://20.204.43.67:4000/forgot-password">Team WishMaster</a></div>
                 </div>
             </body>
             </html>
