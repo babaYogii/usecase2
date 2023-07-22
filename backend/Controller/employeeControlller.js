@@ -62,13 +62,18 @@ exports.uploadXLsxFile = async (req, res) => {
         };
       });
 
-      const existingEmployeeIds = await EmployeeSchema.distinct('employeeid', { employeeid: { $in: data.map((item) => item.employeeid) } });
-      const duplicateEmployeeIds = data.filter((item) => existingEmployeeIds.includes(item.employeeid));
-      if (duplicateEmployeeIds.length > 0) {
-        return res.status(400).json({ message: "Duplicate employee ids found in the XLSX file" });
-      }
-
-      EmployeeSchema.insertMany(data);
+      const operations = data.map((item) => {
+        return {
+          updateOne: {
+            filter: { employeeid: item.employeeid }, // Filter by employeeid
+            update: { $set: item }, // Set all the fields for the document
+            upsert: true, // If no matching document, insert a new one
+          },
+        };
+      });
+      
+      // Execute the bulkWrite operation to perform insert/update
+      await EmployeeSchema.bulkWrite(operations);
 
       await emptyDir('./uploads');
       res.status(200).json({ message: 'File uploaded and data extracted successfully' });
@@ -238,8 +243,11 @@ exports.getUpcomingAnniversary = async (req, res) => {
 exports.getAllEmployee = async (req, res) => {
 
   try {
+
+    
+
     const employee = await EmployeeSchema.find();
-    return res.status(200).json(employee);
+    return res.status(200).json(employee.sort((a,b)=> a.employeeid-b.employeeid));
   } catch (error) {
     console.log(error)
   }

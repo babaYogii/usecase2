@@ -17,7 +17,6 @@ pipeline {
                 script {
                     sh 'npm install --legacy-peer-deps'
                     sh 'npm run build'
-                    
                 }
             }
         }
