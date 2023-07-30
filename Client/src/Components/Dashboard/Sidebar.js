@@ -8,28 +8,28 @@ import IconButton from '@mui/material/IconButton';
 import CakeIcon from '@mui/icons-material/Cake';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 import { Menu, Inbox, Mail } from '@mui/icons-material';
 import { AppBar,  Box,  Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { getUpcomingAnniversary, getUpcomingBirthdays } from '../../api/eventApi';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../ExcelWishmaster.png';
 
-const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    boxShadow: theme.shadows[3], // Adjust the shadow value as needed
-   display:'flex',
-   alignItems:'center',
-   justifyContent:'center'
-  },
+// const useStyles = makeStyles((theme) => ({
+//   toolbar: {
+//     boxShadow: theme.shadows[3], // Adjust the shadow value as needed
+//    display:'flex',
+//    alignItems:'center',
+//    justifyContent:'center'
+//   },
 
-}));
+// }));
 
 
 
 function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItemSelect }) {
 
-  const classes = useStyles();
+  // const classes = useStyles();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [role, setRole] = React.useState('');
@@ -112,8 +112,8 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
 
   const drawer = (
     <div >
-      <Toolbar className={classes.toolbar} >
-        <img src={logo} alt='WishMaster' style={{ width: 80, marginLeft: '-23px', marginRight: '-12px' }} />
+      <Toolbar sx={{display:'flex',alignItems:'center',justifyContent:'center',boxShadow:3}}>
+        <img src={logo} alt='WishMaster' style={{ width: 80, marginLeft: '-35px', marginRight: '-0px' }} />
       </Toolbar>
       <Divider />
 

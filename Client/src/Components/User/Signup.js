@@ -1,90 +1,169 @@
 import React, { useEffect, useState } from 'react';
 import { Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery } from '@mui/material';
-import { makeStyles } from '@mui/styles'
+// import { makeStyles } from '@mui/styles'
 import { AccountCircle, Mail, Https } from '@mui/icons-material';
 import theme from '../../Theme/theme';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from "../../api/userApi"
+import { keyframes } from '@emotion/react';
 
 
-const useStyles = makeStyles((theme) => ({
-    styledpaper: {
-        position: 'relative',
-        '&::before, &::after': {
-            content: "''",
-            position: 'absolute',
-            width: '40%',
-            height: '30%',
-            backgroundColor: theme.palette.secondary.main, // replace with your desired color
-            // opacity:0.8
-        },
-        '&::before': {
-            top: 0,
-            left: 0,
-            clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-            // borderRadius: '20px 0 20px 0'
-        },
-        '&::after': {
-            bottom: -1,
-            right: 0,
-            clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
-            borderRadius: '0 0 20px 0px',
+// const useStyles = makeStyles((theme) => ({
+//     styledpaper: {
+//         position: 'relative',
+//         '&::before, &::after': {
+//             content: "''",
+//             position: 'absolute',
+//             width: '40%',
+//             height: '30%',
+//             backgroundColor: theme.palette.secondary.main, // replace with your desired color
+//             // opacity:0.8
+//         },
+//         '&::before': {
+//             top: 0,
+//             left: 0,
+//             clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+//             // borderRadius: '20px 0 20px 0'
+//         },
+//         '&::after': {
+//             bottom: -1,
+//             right: 0,
+//             clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+//             borderRadius: '0 0 20px 0px',
 
-        }
-    },
+//         }
+//     },
 
-    paper: {
-        padding: theme.spacing(6),
-        maxWidth: 400,
-        // minWidth:300,
-        width: '100%',
-        // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    },
-    title: {
-        marginBottom: theme.spacing(3),
-        textAlign: 'center',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: theme.spacing(2),
-    },
-    textField: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    label: {
-        marginLeft: theme.spacing(1),
-    },
-    circleWithAnimation: {
-        zIndex: '1', width: '20em', height: '20em',
-        animation: '$circleAnimation 8s infinite', borderRadius: '50%', backgroundColor: '#FFC26F',
-        position: 'absolute', top: "20%", opacity: "0.9",
-    },
-    '@keyframes circleAnimation': {
-        '0%': {
-            transform: 'scale(0.85)',
-        },
-        '25%': {
-            transform: 'sacle(0.40) '
-        },
-        '50%': {
-            transform: 'scale(0.5)  ',
-        },
+//     paper: {
+//         padding: theme.spacing(6),
+//         maxWidth: 400,
+//         // minWidth:300,
+//         width: '100%',
+//         // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+//     },
+//     title: {
+//         marginBottom: theme.spacing(3),
+//         textAlign: 'center',
+//     },
+//     form: {
+//         display: 'flex',
+//         flexDirection: 'column',
+//         gap: theme.spacing(2),
+//     },
+//     textField: {
+//         display: 'flex',
+//         alignItems: 'center',
+//     },
+//     label: {
+//         marginLeft: theme.spacing(1),
+//     },
+//     circleWithAnimation: {
+//         zIndex: '1', width: '20em', height: '20em',
+//         animation: '$circleAnimation 8s infinite', borderRadius: '50%', backgroundColor: '#FFC26F',
+//         position: 'absolute', top: "20%", opacity: "0.9",
+//     },
+//     '@keyframes circleAnimation': {
+//         '0%': {
+//             transform: 'scale(0.85)',
+//         },
+//         '25%': {
+//             transform: 'sacle(0.40) '
+//         },
+//         '50%': {
+//             transform: 'scale(0.5)  ',
+//         },
 
-        '100%': {
-            transform: 'scale(0.85) ',
-        },
-    },
-    textContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        width: '100%',
-    },
+//         '100%': {
+//             transform: 'scale(0.85) ',
+//         },
+//     },
+//     textContainer: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         height: '100%',
+//         width: '100%',
+//     },
 
-}));
+// }));
+
+
+const circleAnimation = keyframes`
+  0% {
+    transform: scale(0.85);
+  }
+  50% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(0.85);
+  }
+`;
+
+const styles = {
+  styledpaper: {
+    position: 'relative',
+    '&::before, &::after': {
+      content: "''",
+      position: 'absolute',
+      width: '33%',
+      height: '27%',
+      backgroundColor: '#C38154', // replace with your desired color
+    },
+    '&::before': {
+      top: 0,
+      left: 0,
+      clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+    },
+    '&::after': {
+      bottom: -1,
+      right: 0,
+      clipPath: 'polygon(100% 0, 100% 100%, 0 100%)',
+      borderRadius: '0 0 20px 0px',
+    },
+  },
+  paper: {
+    padding: '16px',
+    maxWidth: '400px',
+    width: '100%',
+    // boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+  },
+  title: {
+    marginBottom: '24px',
+    textAlign: 'center',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  },
+  textField: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  label: {
+    marginLeft: '8px',
+  },
+  circleWithAnimation: {
+    zIndex: '1',
+    width: '20em',
+    height: '20em',
+    animation: `${circleAnimation} 6s infinite`,
+    borderRadius: '50%',
+    backgroundColor: '#FFC26F',
+    position: 'absolute',
+    top: '25%',
+    opacity: '0.9',
+  },
+  textContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+};
+
 
 
 
@@ -93,7 +172,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Signup = () => {
     const navigate = useNavigate();
-    const classes = useStyles();
+    // const classes = useStyles();
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     const [userData, setUserData] = React.useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
@@ -103,14 +182,14 @@ const Signup = () => {
 
 
     useEffect(() => {
-    
-        
+
+
         let a = localStorage.getItem('token')
 
         if (a) {
             navigate('/dashboard')
         }
-    },[navigate,errors]
+    }, [navigate, errors]
     )
 
 
@@ -123,33 +202,33 @@ const Signup = () => {
         setErrors(validate({
             ...userData,
             [e.target.name]: e.target.value
-          }));
+        }));
     }
 
     const handelSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setErrors(validate(userData));
-        
-        
-        if(Object.keys(errors).length===0 && isSubmit){
-        
-        try {
-            const response = await signup({ ...userData });
-            // console.log(response.data);
-            if (response.status === 201) {
-                navigate('/signin')
+
+
+        if (Object.keys(errors).length === 0 && isSubmit) {
+
+            try {
+                const response = await signup({ ...userData });
+                // console.log(response.data);
+                if (response.status === 201) {
+                    navigate('/signin')
+                }
+            } catch (e) {
+                alert(e.response.data.message)
+                // console.log(e.response.data.message)
+                // console.log(error)
             }
-        } catch (e) {
-            alert(e.response.data.message)
-            // console.log(e.response.data.message)
-            // console.log(error)
         }
-    }
         setisSubmit(true)
 
         // console.log(userData);
     }
-    
+
 
 
     const validate = (values) => {
@@ -194,39 +273,40 @@ const Signup = () => {
             display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%',
 
         }}>
-            <Paper className={classes.styledpaper} elevation={12} gap={3}
+            <Paper elevation={20} gap={3}
                 sx={{
                     display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'center', minWidth: 300,
                     width: isSmallScreen ? '100%' : '50%',
                     height: isSmallScreen ? '100%' : 'auto',
-                    borderRadius: isSmallScreen ? '0' : '5%'
+                    borderRadius: isSmallScreen ? '0' : '5%',
+                    ...styles.styledpaper
                 }}>
                 <Typography variant='h4' position='absolute' sx={{
                     left: '50%',
                     transform: 'translateX(-50%)',
                     top: 30,
-                    mb: 5, mt: 2, color: theme.palette.PrimarySecond.main, fontWeight: 600
+                     mt: 2, color: theme.palette.PrimarySecond.main, fontWeight: 600,fontSize:40
                 }} align='center'  >Register Now</Typography>
                 <Hidden mdDown>
 
                     <Box sx={{ width: "50%", display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                        <div className={classes.circleWithAnimation}  >
-                            <div className={classes.textContainer}>
-                                <Typography sx={{ position: 'absolute', fontWeight: 550 }} variant='h3' align='center' color="#884A39">
+                         
+                        <Box sx={{...styles.circleWithAnimation}}>
+                            <Box sx={{...styles.textContainer,paddingX:1}}>
+                            <Typography sx={{  fontWeight: 550 }} variant='h3' align='center' color="#884A39">
                                     Welcome!!! Join us</Typography>
-                            </div>
-                        </div>
+                            </Box>
+
+                        </Box>
                     </Box>
                 </Hidden>
-
-
-
-
-
-                <Box className={classes.paper} width={isSmallScreen ? '100vw' : 'auto'} >
-
-                    <form className={classes.form} onSubmit={handelSubmit} noValidate autoComplete='off'>
-                        <Box  sx={{ zIndex: 1, mt: 6 }} display='flex' flexDirection='column' >
+                <Box width={isSmallScreen ? '100vw' : 'auto'} sx={{ padding: 6,mt:4.3 }} >
+                {/* <Typography variant='h4'  align='right'
+                sx={{
+                       color: theme.palette.PrimarySecond.main, fontWeight: 600,fontSize:40
+                    }}>Register Now</Typography> */}
+                    <form onSubmit={handelSubmit} noValidate autoComplete='off' style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                        <Box sx={{ zIndex: 1, mt: 8 }} display='flex' flexDirection='column' >
                             <TextField type='text' label="First Name" required name='firstName' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -238,14 +318,13 @@ const Signup = () => {
                                     ),
                                     style: { fontSize: '20px' }
                                 }}
-
                                 fullWidth
                             />
-                             {(errors.firstName && (!userData.firstName || userData.firstName.length < 2)) && <Typography variant='caption' color='red' fontSize="10px">{errors.firstName}</Typography>}
+                            {(errors.firstName && (!userData.firstName || userData.firstName.length < 2)) && <Typography variant='caption' color='red' fontSize="10px">{errors.firstName}</Typography>}
 
                         </Box>
 
-                        <Box  sx={{ zIndex: 1 }}>
+                        <Box sx={{ zIndex: 1 }}>
                             <TextField type='text' label="Last Name" required name='lastName' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -264,7 +343,7 @@ const Signup = () => {
 
                         </Box>
 
-                        <Box  sx={{ zIndex: 1 }}>
+                        <Box sx={{ zIndex: 1 }}>
                             <TextField type='text' label="Email" required name='email' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -279,10 +358,10 @@ const Signup = () => {
                                 }}
                                 fullWidth
                             />
-                            {(errors.email ) && <Typography variant='caption' fontSize="10px" color='red'>{errors.email}</Typography>}
+                            {(errors.email) && <Typography variant='caption' fontSize="10px" color='red'>{errors.email}</Typography>}
 
                         </Box>
-                        <Box    sx={{ zIndex: 1 }}>
+                        <Box sx={{ zIndex: 1 }}>
                             <TextField type='password' label="Password" required name='password' onChange={handelChange}
                                 InputProps={{
                                     startAdornment: (
@@ -295,13 +374,13 @@ const Signup = () => {
                                     style: { fontSize: '24px' }
 
                                 }}
-                                
+
                                 fullWidth
                             />
-                        {(errors.password || (!userData.password)) && <Typography fontSize="10px" sx={{my:4}} variant='caption' color='red'>{errors.password}</Typography>}
-                            
+                            {(errors.password || (!userData.password)) && <Typography fontSize="10px" sx={{ my: 4 }} variant='caption' color='red'>{errors.password}</Typography>}
+
                         </Box>
-                        <Box  sx={{ zIndex: 1 }}>
+                        <Box sx={{ zIndex: 1 }}>
                             <TextField type='password'
                                 sx={{ color: theme.palette.PrimarySecond.main }}
                                 label="Confirm password" required name='confirmPassword' onChange={handelChange}
@@ -318,7 +397,7 @@ const Signup = () => {
                                 }}
                                 fullWidth
                             />
-                           {(errors.confirmPassword && (!userData.confirmPassword || userData.confirmPassword!==userData.password)) && <Typography variant='caption' fontSize="10px" color='red'>{errors.confirmPassword}</Typography>}
+                            {(errors.confirmPassword && (!userData.confirmPassword || userData.confirmPassword !== userData.password)) && <Typography variant='caption' fontSize="10px" color='red'>{errors.confirmPassword}</Typography>}
 
                         </Box>
 
@@ -326,7 +405,7 @@ const Signup = () => {
                             variant="contained"
                             type="submit"
                             sx={{ zIndex: 1, transition: "none", color: theme.palette.PrimaryLight.main, fontWeight: 600 }} disableTouchRipple disableFocusRipple
-                            className={classes.submitButton}
+                        // className={classes.submitButton}
                         >
                             Confirm
                         </Button>

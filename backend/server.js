@@ -17,7 +17,7 @@ app.use(employeeRoute)
 connectDb();
 
 
-const build=path.join(__dirname+'/public')
+const build=path.join(__dirname+'/Public')
 // path.join(__dirname+'/public')
 app.use(express.static(build))
 

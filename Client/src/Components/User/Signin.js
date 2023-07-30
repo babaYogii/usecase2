@@ -1,42 +1,42 @@
 import React from 'react';
 import { Paper, Typography, TextField, Button, Box, InputAdornment, IconButton, Hidden, useMediaQuery } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 import { AccountCircle, Https } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { signin } from '../../api/userApi';
 
-const useStyles = makeStyles((theme) => ({
+// const useStyles = makeStyles((theme) => ({
 
-  paper: {
-    mt: 20,
-    display: "flex",
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingY: theme.spacing(4),
-    height: '80vh',
-    position: 'relative',
-    borderRadius: '5%',
-    [theme.breakpoints.down('sm')]: {
-      width: '100%', // Set full width for smaller devices
-      height: '100%',
-      borderRadius: '0px'
-    },
+//   paper: {
+//     mt: 20,
+//     display: "flex",
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     paddingY: theme.spacing(4),
+//     height: '80vh',
+//     position: 'relative',
+//     borderRadius: '5%',
+//     [theme.breakpoints.down('sm')]: {
+//       width: '100%', // Set full width for smaller devices
+//       height: '100%',
+//       borderRadius: '0px'
+//     },
 
-  },
-  title: {
-    marginBottom: theme.spacing(3),
-    textAlign: 'center',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: theme.spacing(3),
-  },
-}));
+//   },
+//   title: {
+//     marginBottom: theme.spacing(3),
+//     textAlign: 'center',
+//   },
+//   form: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     gap: theme.spacing(3),
+//   },
+// }));
 
 const Signin = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [user, setUser] = React.useState({});
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const navigate = useNavigate();
@@ -83,11 +83,11 @@ const Signin = () => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }} >
-      <Paper className={classes.paper} elevation={12} sx={{ borderRadius: isSmallScreen ? '0' : '5%', }}>
+      <Paper elevation={20} sx={{ borderRadius: isSmallScreen ? '0' : '5%', display: 'flex', height: '80vh' }}>
 
-        <Box flex={1.7} padding={2}  >
+        <Box flex={1.7} padding={2} sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center', justifyContent: 'center', padding: 8  }} >
 
-          <form className={classes.form} onSubmit={handleSubmit} noValidate autoComplete='off'>
+          <form onSubmit={handleSubmit} noValidate autoComplete='off' style={{ display: 'flex', flexDirection: 'column', gap: 20}}>
             <Typography variant='h4' align='center' component='h1' fontSize='2.5rem' fontWeight='700'>Login to Your Account</Typography>
             <TextField
               type="text"
@@ -125,19 +125,19 @@ const Signin = () => {
               }}
             />
 
-            <Button variant="contained" color="primary" type="submit" sx={{ width: '35%', mb: 0 }} disableTouchRipple disableFocusRipple>
+            <Button variant="contained" color="primary" type="submit" sx={{ width: '35%', ml: 15 }} disableTouchRipple disableFocusRipple>
               Sign In
-            </Button>            
-            
+            </Button>
             {isSmallScreen ?
               <Box fontSize={12}>
                 <span>Don't have an account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></span>
               </Box> : ""
             }
           </form>
-          <Box sx={{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',mt:1}}>
 
-            <Typography component='a' href="/forgot-password" style={{textDecoration:'none'}} sx={{align:'center'}} variant='caption'>Forgot Password</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', mt: 1 }}>
+
+            <Typography component='a' href="/forgot-password" style={{ textDecoration: 'none' }} sx={{ align: 'center' }} variant='caption'>Forgot Password</Typography>
           </Box>
         </Box>
         <Hidden mdDown>

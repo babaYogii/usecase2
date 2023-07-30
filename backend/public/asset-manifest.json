@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.71c0de43.css",
-    "main.js": "/static/js/main.8049205f.js",
+    "main.js": "/static/js/main.c1b623d9.js",
     "static/media/Orange-Yellow.png": "/static/media/Orange-Yellow.79d8b88527542257da00.png",
     "static/media/ExcelWishmaster.png": "/static/media/ExcelWishmaster.8d42f10f95ee51fd46be.png",
     "index.html": "/index.html",
     "main.71c0de43.css.map": "/static/css/main.71c0de43.css.map",
-    "main.8049205f.js.map": "/static/js/main.8049205f.js.map"
+    "main.c1b623d9.js.map": "/static/js/main.c1b623d9.js.map"
   },
   "entrypoints": [
     "static/css/main.71c0de43.css",
-    "static/js/main.8049205f.js"
+    "static/js/main.c1b623d9.js"
   ]
 }
