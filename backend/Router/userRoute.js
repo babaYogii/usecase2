@@ -2,7 +2,6 @@ const express=require('express');
 const { signUp,resetPassword, signin, adminSignUp } = require('../Controller/userController');
 const { isRequestValidated, validateSignUpRequest, validateSignInrequest } = require('../Validation/userValidation');
 const { sendMail } = require('../Middleware/sendMail');
-const findUser = require('../Middleware/validateUser');
 const { uploadXLsxFile } = require('../Controller/employeeControlller');
 const router=express.Router();
 
@@ -12,13 +11,13 @@ const upload = multer({ dest: 'uploads/' });
 
 
 
-router.post('/signup',validateSignUpRequest,isRequestValidated,signUp);
+// router.post('/signup',validateSignUpRequest,isRequestValidated,signUp);
 
-router.post('/sendmailfor-resetpassword',sendMail);
+// router.post('/signin',validateSignInrequest,isRequestValidated,signin );
 
-router.put('/reset-password/:token',resetPassword);
+// router.post('/sendmailfor-resetpassword',sendMail);
 
-router.post('/signin',validateSignInrequest,isRequestValidated,signin );
+// router.put('/reset-password/:token',resetPassword);
 
 router.post('/addadmin',requiresignin,validateSignUpRequest,isRequestValidated,adminSignUp)
 

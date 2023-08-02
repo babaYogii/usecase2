@@ -36,7 +36,7 @@ const UploadFile = () => {
             const formData = new FormData();
             formData.append('file', selectedFile);
 
-            axios.post('/uploadfile', formData)
+            axios.post('/events/uploadfile', formData)
                 .then(response => {
                     alert('File uploaded successfully')
                     navigate('/dashboard');

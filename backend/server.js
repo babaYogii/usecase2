@@ -10,8 +10,8 @@ const connectDb = require('./connection');
 
 app.use(cors());
 app.use(express.json());
-app.use(userRoute)
-app.use(employeeRoute)
+app.use("/events",userRoute)
+app.use("/events",employeeRoute)
 
 
 connectDb();

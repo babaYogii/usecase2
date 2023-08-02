@@ -1,5 +1,5 @@
 # Use the official Node.js 18.x image as the base image
-FROM node:18-alpine
+FROM node:18-alpine as wishmaster
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -9,16 +9,30 @@ COPY package.json ./
 
 # Install Node.js dependencies
 RUN npm config set strict-ssl false
+RUN npm cache clean --force
+
 RUN npm install
 
 # Copy the entire React app to the container's working directory
 COPY . .
 
-# Build the React app
-RUN npm run build 
+# # Build the React app
+# RUN npm run build 
 
 # Expose the port on which the React app will run (default is 3000)
-EXPOSE 3000
+# EXPOSE 3000
 
-# Start the React app when the container starts
-CMD ["npm", "start"]
+# # Start the React app when the container starts
+# CMD ["npm", "start"]
+
+
+RUN npm run build
+
+FROM nginx:latest
+
+# Copy the custom Nginx configuration file to the container
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+LABEL maintainer=Yogesh-Kodlinge
+COPY --from=wishmaster /app/build/ /usr/share/nginx/html
+EXPOSE 80

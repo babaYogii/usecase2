@@ -9,21 +9,24 @@ import axios from 'axios'
 export const signup=async({firstName,lastName,email,password,confirmPassword})=>{
     // const {}=data;
          
-        const response=await axios.post('/signup',{firstName,lastName,email,password,confirmPassword});
+    console.log(window.location.hostname+window.location.pathname) 
+        const response=await axios.post('/auth/signup',{firstName,lastName,email,password,confirmPassword});
         return response;
-        // console.log(response.message) 
 }
 
 
 export const signin=async({email,password})=>{
-    const response=await axios.post('/signin',{email,password});
+
+    console.log(window.location.hostname+window.location.pathname) 
+
+    const response=await axios.post('/auth/signin',{email,password});
     return response;
 }
 
 export const getAllEmployee=async()=>{
     let token=localStorage.getItem('token');
 
-    const response=await axios.get('/employee',{ headers: {"Authorization" : `Bearer ${token}`}})
+    const response=await axios.get('/events/employee',{ headers: {"Authorization" : `Bearer ${token}`}})
     // console.log(response);
     return response;
 }
@@ -31,7 +34,7 @@ export const getAllEmployee=async()=>{
 export const resetPassword=async({token,password,confirmPassword})=>{
     // /reset-password/:token
     // console.log(BaseUrl+`/reset-password/${token}`)
-    const response=await axios.put(`/reset-password/${token}`,{password,confirmPassword})
+    const response=await axios.put(`/auth/reset-password/${token}`,{password,confirmPassword})
     return response;
     
 }

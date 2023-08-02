@@ -8,7 +8,7 @@ import axios from 'axios'
 export const getUpcomingBirthdays=async(days)=>{
         let token=localStorage.getItem('token');
       
-        const response=await axios.get(`/birthdays/${days}`,{ headers: {"Authorization" : `Bearer ${token}`}});
+        const response=await axios.get(`/events/birthdays/${days}`,{ headers: {"Authorization" : `Bearer ${token}`}});
    
         return response;
 
@@ -17,7 +17,7 @@ export const getUpcomingBirthdays=async(days)=>{
 export const getUpcomingAnniversary=async(days)=>{
         let token=localStorage.getItem('token');
       
-        const response=await axios.get(`/anniversaries/${days}`,{ headers: {"Authorization" : `Bearer ${token}`}});
+        const response=await axios.get(`/events/anniversaries/${days}`,{ headers: {"Authorization" : `Bearer ${token}`}});
    
         return response;
 
