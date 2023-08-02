@@ -40,20 +40,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: event-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: event
   template:
     metadata:
       labels:
-        app: backend
+        app: event
     spec:
       containers:
-      - name: backend
-        image: usecase2.azurecr.io/backendservice:latest
+      - name: event
+        image: usecase2.azurecr.io/eventservice:latest
         ports:
         - containerPort: 4000
 
@@ -62,14 +62,50 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: event-service
 spec:
   selector:
-    app: backend
+    app: event
   ports:
     - protocol: TCP
       port: 4000
       targetPort: 4000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+      - name: admin
+        image: usecase2.azurecr.io/adminservice:latest
+        ports:
+        - containerPort: 4002
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-service
+spec:
+  selector:
+    app: admin
+  ports:
+    - protocol: TCP
+      port: 4002
+      targetPort: 4002
 
 ---
 
