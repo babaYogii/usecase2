@@ -94,20 +94,12 @@ pipeline {
             	}
         	}
     	}
-      stage('Test jenkins access to Az'){
-        steps{
-            step{
-
-                sh 'az --version'
-            }
-        }
-      }
-
 
     	stage('Deploy to AKS') {
         	steps {
             	script {
                 	// Retrieve AKS credentials
+                    sh "az --version"
                 	sh "az aks get-credentials --resource-group Usecase2 --name kubecluster --overwrite-existing"
 
                 	// Apply Kubernetes manifests
