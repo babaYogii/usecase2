@@ -100,6 +100,7 @@ pipeline {
             	script {
                 	// Retrieve AKS credentials
                     sh "az --version"
+                    sh "az login"
                 	sh "az aks get-credentials --resource-group Usecase2 --name kubecluster --overwrite-existing"
 
                 	// Apply Kubernetes manifests
