@@ -68,7 +68,7 @@ pipeline {
     	stage('Build Images') {
         	steps {
             	dir('Client') {
-                	sh 'docker build -t $usecase2.azurecr.io/wishmasterfrontend .'
+                	sh 'docker build -t usecase2.azurecr.io/wishmasterfrontend .'
             	}
             	dir('EventService') {
                 	sh 'docker build -t usecase2.azurecr.io/eventservice .'
