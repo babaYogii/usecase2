@@ -94,6 +94,15 @@ pipeline {
             	}
         	}
     	}
+      stage('Test jenkins access to Az'){
+        steps{
+            step{
+
+                sh 'az --version'
+            }
+        }
+      }
+
 
     	stage('Deploy to AKS') {
         	steps {
