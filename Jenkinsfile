@@ -68,16 +68,16 @@ pipeline {
     	stage('Build Images') {
         	steps {
             	dir('Client') {
-                	sh 'docker build -t $registry wishmasterfrontend .'
+                	sh 'docker build -t $usecase2.azurecr.io/wishmasterfrontend .'
             	}
             	dir('EventService') {
-                	sh 'docker build -t $registry eventservice .'
+                	sh 'docker build -t usecase2.azurecr.io/eventservice .'
             	}
             	dir('AdminFunctionalites') {
-                	sh 'docker build -t $registry adminservice .'
+                	sh 'docker build -t usecase2.azurecr.io/adminservice .'
             	}
             	dir('AuthService') {
-                	sh 'docker build -t $registry authservice .'
+                	sh 'docker build -t usecase2.azurecr.io/authservice .'
             	}
             	
         	}
@@ -87,10 +87,10 @@ pipeline {
         	steps {
             	withCredentials([usernamePassword(credentialsId: 'jenkins-azure-bridge', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
                 	sh "docker login -u $ACR_USERNAME -p $ACR_PASSWORD usecase2.azurecr.io"
-                	sh "docker push $registry wishmasterfrontend"
-                	sh "docker push $registry eventservice"
-                	sh "docker push $registry adminservice"
-                	sh "docker push $registry authservice"
+                	sh "docker push usecase2.azurecr.io/wishmasterfrontend"
+                	sh "docker push usecase2.azurecr.io/eventservice"
+                	sh "docker push usecase2.azurecr.io/adminservice"
+                	sh "docker push usecase2.azurecr.io/authservice"
             	}
         	}
     	}
