@@ -94,7 +94,7 @@ const LandingPage = () => {
                 or
                 <Typography variant="h4"
                     component="h4"
-                    sx={{ display: 'inline', color: '#03A9F4', textAlign: 'center', fontFamily: 'Rubik', mx: 1 }}
+                    sx={{ display: 'inline', color: '', textAlign: 'center', fontFamily: 'Rubik', mx: 1 }}
                 >
 
                     birthday
