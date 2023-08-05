@@ -108,6 +108,7 @@ pipeline {
 
                 	// Apply Kubernetes manifests
                 	sh "kubectl apply -f microservices.yaml"
+					sh "kubectl rollout restart deployment --all"
             	}
         	}
     	}
