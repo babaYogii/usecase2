@@ -99,9 +99,12 @@ pipeline {
         	steps {
             	script {
                 	// Retrieve AKS credentials
-                    sh "az --version"
-                    sh "az login"
-                	sh "az aks get-credentials --resource-group Usecase2 --name kubecluster --overwrite-existing"
+                    // sh "az --version"
+                    // sh "az login"
+					withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeclusterconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+    				// some block
+						}
+                	// sh "az aks get-credentials --resource-group Usecase2 --name kubecluster --overwrite-existing"
 
                 	// Apply Kubernetes manifests
                 	sh "kubectl apply -f microservices.yaml"
