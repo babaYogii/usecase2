@@ -24,6 +24,13 @@ app.get('*',async(req,res)=>{
     res.sendFile(path.join(build,'index.html'))
 })
 
+// Add this to the very top of the first file loaded in your app
+var apm = require('elastic-apm-node').start({
+    serviceName: 'Event-service',
+    secretToken: '2RvuKXH7g2KNkGEoNq',
+    serverUrl: 'https://fedd99c6c2a9445a9235a41a897dc998.apm.us-central1.gcp.cloud.es.io:443',
+    environment: 'my-environment'
+  })
 
 
 
