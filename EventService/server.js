@@ -32,7 +32,7 @@ var apm = require('elastic-apm-node').start({
     environment: 'my-environment'
   })
 
-  app.use(apm.middleware.express());
+//   app.use(apm.middleware.express());
 
 
 app.listen(4000,()=>{
