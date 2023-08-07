@@ -2,8 +2,6 @@ const EmployeeSchema = require('../Model/employeeSchema')
 
 
 
-
-
 const isUpcomingEventWithinLimit = (eventDate, todayDate, extend) => {
   const date = new Date(eventDate);
   const today = new Date(todayDate);
@@ -81,14 +79,8 @@ exports.getUpcomingBirthdays = async (req, res) => {
           }
           break;
       }
-
-
-
-
-
-
-
     }
+    console.log("Successful recived data")
 
     res.status(200).json(ans);
 
@@ -145,6 +137,7 @@ exports.getUpcomingAnniversary = async (req, res) => {
       }
 
     }
+    console.log("Successful recived data")
 
     res.status(200).json(ans);
 

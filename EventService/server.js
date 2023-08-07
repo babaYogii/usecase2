@@ -16,6 +16,7 @@ var apm = require('elastic-apm-node').start({
     environment: 'my-environment'
 })
 
+app.use(apm.middleware.connect());
 app.use(cors());
 app.use(express.json());
 app.use("/events",employeeRoute)
@@ -33,8 +34,6 @@ app.get('*',async(req,res)=>{
 })
 
 // Add this to the very top of the first file loaded in your app
-
-app.use(apm.middleware.connect());
 
 
 app.listen(4000,()=>{
