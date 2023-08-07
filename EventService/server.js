@@ -19,7 +19,7 @@ var apm = require('elastic-apm-node').start({
 app.use(apm.middleware.connect());
 app.use(cors());
 app.use(express.json());
-app.use("/events",employeeRoute)
+app.use("/events",apm.middleware.connect(),employeeRoute)
 
 
 connectDb();
