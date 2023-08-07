@@ -80,7 +80,7 @@ exports.getUpcomingBirthdays = async (req, res) => {
           break;
       }
     }
-    console.log("Successful recived data")
+    console.log("Successful recived data",ans)
 
     res.status(200).json(ans);
 
@@ -137,7 +137,7 @@ exports.getUpcomingAnniversary = async (req, res) => {
       }
 
     }
-    console.log("Successful recived data")
+    console.log("Successful recived data",ans)
 
     res.status(200).json(ans);
 
