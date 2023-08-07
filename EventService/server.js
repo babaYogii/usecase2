@@ -2,11 +2,12 @@ const express=require('express');
 const app=express();
 const cors=require('cors')
 // const userRoute=require('./Router/userRoute');
+//https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201
 const employeeRoute=require('./Router/employeeRoutes')
 const path=require('path')
-
-
 const connectDb = require('./connection');
+
+
 
 var apm = require('elastic-apm-node').start({
     serviceName: 'Event-service',
@@ -33,7 +34,7 @@ app.get('*',async(req,res)=>{
 
 // Add this to the very top of the first file loaded in your app
 
-
+app.use(apm.middleware.connect());
 
 
 app.listen(4000,()=>{
