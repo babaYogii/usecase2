@@ -3,7 +3,8 @@ var apm = require('elastic-apm-node').start({
     secretToken: '2RvuKXH7g2KNkGEoNq',
     serverUrl: 'https://fedd99c6c2a9445a9235a41a897dc998.apm.us-central1.gcp.cloud.es.io:443',
     environment: 'my-environment',
-    logLevel:'trace'
+    logLevel:'trace',
+    logging:'true'
 })
 
   
