@@ -9,7 +9,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: "48%",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -62,6 +62,8 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
     'Surprise them with a travel-inspired piece of artwork or decor for their home',
     'Organize a themed party that transports them to the culture and ambiance of their favorite place',
   ];
+  const FoodEmoji=["👅","😋","🤤","🤗"]
+  const FavPlace=["😍","🌍","🏖️"]
   const getRandomOption = (options) => {
     const randomIndex = Math.floor(Math.random() * options.length);
     return options[randomIndex];
@@ -70,6 +72,8 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
   const colorOption = getRandomOption(colorOptions);
   const foodOption = getRandomOption(foodOptions);
   const placeOption = getRandomOption(placeOptions);
+  const foodEmoji=getRandomOption(FoodEmoji);
+  const favouritePlace=getRandomOption(FavPlace);
 
 
   return (
@@ -82,27 +86,27 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
         aria-describedby="modal-modal-description"
 
       >
-        <Box sx={{...style,...flowerBackground}} className='modal-background'>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box sx={{...style,...flowerBackground,}} className='modal-background'>
+          <Typography id="modal-modal-title" variant="h4" component="h2" sx={{fontSize:38,}}>
             Know More
           </Typography>
-          <Typography variant='subtitle1' sx={{ mt: 2 }}>
-            Planning a surprise for <strong>{birthday.employeename}?</strong>,here are few suggestions
+          <Typography variant='h5' sx={{ mt: 2 }}>
+            Planning a surprise for <strong>{birthday.employeename}?</strong> here are few suggestions
           </Typography>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite color is <strong>{birthday.favouriteColour}</strong></Typography>
-            <Typography fontSize='13px'>{colorOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite color is <strong>{birthday.favouriteColour}</strong></Typography>
+            <Typography variant='subtitle1'>{colorOption}</Typography>
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite Food is <strong>{birthday.favouritefood}</strong></Typography>
-            <Typography fontSize='13px'>{foodOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite Food is <strong>{birthday.favouritefood}</strong><span style={{ fontSize: '1.8rem' }}>{foodEmoji}</span></Typography>
+            <Typography variant='subtitle1'>{foodOption}</Typography>
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite Place is <strong>{birthday.placeofinterest}</strong></Typography>
-            <Typography fontSize='13px'>  {placeOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite Place is <strong>{birthday.placeofinterest}</strong><span style={{ fontSize: '1.8rem' }}>{favouritePlace}</span></Typography>
+            <Typography variant='subtitle1'>  {placeOption}</Typography>
           </Box>
           <hr />
           <Box>

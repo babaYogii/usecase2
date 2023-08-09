@@ -57,6 +57,8 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
     'Surprise them with a travel-inspired piece of artwork or decor for their home',
     'Organize a themed party that transports them to the culture and ambiance of their favorite place',
   ];
+  const FoodEmoji=["👅","😋","🤤","🤗"]
+  const FavPlace=["😍","🌍","🏖️"]
   const getRandomOption = (options) => {
     const randomIndex = Math.floor(Math.random() * options.length);
     return options[randomIndex];
@@ -65,7 +67,8 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
   const colorOption = getRandomOption(colorOptions);
   const foodOption = getRandomOption(foodOptions);
   const placeOption = getRandomOption(placeOptions);
-
+  const foodEmoji=getRandomOption(FoodEmoji);
+  const favouritePlace=getRandomOption(FavPlace);
 
   return (
     <div>
@@ -86,12 +89,12 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
           </Typography>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite color is <strong>{birthday.favouriteColour}</strong></Typography>
+            <Typography display='block' variant='subtitle2'>Favourite color is <strong>{birthday.favouriteColour}</strong><span style={{ fontSize: '1.8rem' }}>{foodEmoji}</span></Typography>
             <Typography fontSize='13px'>{colorOption}</Typography>
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite Food is <strong>{birthday.favouritefood}</strong></Typography>
+            <Typography display='block' variant='subtitle2'>Favourite Food is <strong>{birthday.favouritefood}</strong><span style={{ fontSize: '1.8rem' }}>{FavPlace}</span></Typography>
             <Typography fontSize='13px'> {foodOption}</Typography>
           </Box>
           <hr />
