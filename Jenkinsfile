@@ -98,15 +98,13 @@ pipeline {
     	stage('Deploy to AKS') {
         	steps {
             	script {
-                	// Retrieve AKS credentials
-                    // sh "az --version"
-                    // sh "az login"
+                	
 					withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeclusterconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
     				// some block
 						}
-                	// sh "az aks get-credentials --resource-group Usecase2 --name kubecluster --overwrite-existing"
+                	
 
-                	// Apply Kubernetes manifests
+                	
 					sh "kubectl delete deployment frontend-deployment authservice-deployment admin-deployment event-deployment"
                 	sh "kubectl apply -f microservices.yaml"
 					// sh "kubectl rollout restart deployment frontend-deployment authservice-deployment admin-deployment event-deployment"
