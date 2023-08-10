@@ -113,7 +113,7 @@ function Sidebar({ setBirthday, birthday, anniversary, setAnniversary,onMenuItem
   const drawer = (
     <div >
       <Toolbar sx={{display:'flex',alignItems:'center',justifyContent:'center',boxShadow:3}}>
-        <img src={logo} alt='WishMaster' style={{ width: 80, marginLeft: '-35px', marginRight: '-0px' }} />
+        <img src={logo} onClick={()=>{navigate('/')}} alt='WishMaster' style={{ width: 80, marginLeft: '-35px', marginRight: '-0px',cursor:'pointer' }} />
       </Toolbar>
       <Divider />
 

@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, useMediaQuery } from '@mui/material';
 import React from 'react';
 import { keyframes,styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,7 @@ const fadeInAnimation = keyframes`
 `;
 
 
+
 const AnimatedTypography = styled(Typography)`
   animation: ${fadeInAnimation} 1000ms ease-in infinite;
 `;
@@ -26,6 +27,7 @@ const AnimatedTypography = styled(Typography)`
 const LandingPage = () => {
  
     const navigate=useNavigate();
+    const isSmallerScreen = useMediaQuery('(max-width: 600px)')
 
     const handleClick = () => {
         navigate('/dashboard');
@@ -70,17 +72,19 @@ const LandingPage = () => {
             </AnimatedTypography>
            
                 </Box>
-            <Typography variant="h2" component="h4" sx={{ display: 'inline', fontFamily: 'Rubik',my:0 }}>
-                Surprise your{' '}
-                <Typography
+            <Box sx={{display:'flex' , flexDirection:isSmallerScreen?"column":'row'}}>
+            <Typography variant="h2" component="h4" sx={{  fontFamily: 'Rubik',  }}>
+                Surprise your
+            </Typography>
+            <Typography
                     variant="h2"
                     component="h4"
-                    sx={{ display: 'inline', backgroundColor: 'Amber.main',my:0,
-                     color: 'white', p: 0.2, fontFamily: 'Rubik' }}
+                    sx={{  backgroundColor: 'Amber.main',
+                     color: 'white', p: 0.2, fontFamily: 'Rubik',  }} 
                 >  
-                    colleagues
+                     colleagues
                 </Typography>
-            </Typography>
+            </Box>
             <Typography
                 variant="h4"
                 component="h4"
@@ -107,8 +111,8 @@ const LandingPage = () => {
                 View Events
             </Button>
             </Box>
-            <Box sx={{position:'absolute',top:4,left:30, }} className='App-logo'>
-               <img src={logo}  alt='Logo' style={{width:100,borderRadius:'50%',}}/>
+            <Box sx={{position:'absolute',top:4,left:30, }}  className='App-logo'>
+               <img src={logo}  alt='Logo' onClick={()=>{navigate('/')}}  style={{width:100,borderRadius:'50%',cursor:'pointer',outline: 'none',}}/>
             </Box>
         </Box>
     );
