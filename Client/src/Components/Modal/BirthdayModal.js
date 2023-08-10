@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useMediaQuery } from '@mui/material';
 
 
 const style = {
@@ -69,6 +70,7 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
   const placeOption = getRandomOption(placeOptions);
   const foodEmoji=getRandomOption(FoodEmoji);
   const favouritePlace=getRandomOption(FavPlace);
+  const isSmallerScreen=useMediaQuery('(max-width: 600px)');
 
   return (
     <div>
@@ -78,29 +80,28 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box sx={{...style,width: isSmallerScreen ? "100%" : "47%"}}>
+          <Typography id="modal-modal-title" variant="h4" component="h2" sx={{fontSize:38,}}>
             Know More
           </Typography>
-          <Typography variant='subtitle1' sx={{ mt: 2 }}>
+          <Typography variant='h5' sx={{ mt: 2 }}>
             Planning a surprise for <strong>{birthday.employeename} ?</strong>,here are few suggestions
           </Typography>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite color is <strong>{birthday.favouriteColour}</strong><span style={{ fontSize: '1.8rem' }}>{foodEmoji}</span></Typography>
-            <Typography fontSize='13px'>{colorOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite color is <strong>{birthday.favouriteColour}</strong></Typography>
+            <Typography variant='subtitle1'>{colorOption}</Typography>
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite Food is <strong>{birthday.favouritefood}</strong><span style={{ fontSize: '1.8rem' }}>{FavPlace}</span></Typography>
-            <Typography fontSize='13px'> {foodOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite Food is <strong>{birthday.favouritefood}</strong><span style={{ fontSize: '1.8rem' }}>{foodEmoji}</span></Typography>
+            <Typography variant='subtitle1'> {foodOption}</Typography>
           </Box>
           <hr />
           <Box>
-            <Typography display='block' variant='subtitle2'>Favourite Place is <strong>{birthday.placeofinterest}</strong></Typography>
-            <Typography fontSize='13px'>{placeOption}</Typography>
+            <Typography display='block' variant='h6'>Favourite Place is <strong>{birthday.placeofinterest}</strong><span style={{ fontSize: '1.8rem' }}>{favouritePlace}</span></Typography>
+            <Typography fvariant='subtitle1'>{placeOption}</Typography>
           </Box>
           <hr />
           <Box>
