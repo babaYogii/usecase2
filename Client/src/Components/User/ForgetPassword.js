@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { Box, Button, Hidden, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { resetPasswordEmail } from '../../api/adminApi'
 import { Link, useNavigate } from 'react-router-dom'
@@ -38,16 +38,19 @@ const ForgetPassword = () => {
     // filter: drop-shadow(10px 10px 200px $tod-tri) drop-shadow(-10px -10px 50px $tod-tri);
     return (
         <Box sx={{ display: 'flex', width: '100%', height: '100%', }}>
+        <Hidden smDown>
+
             <Box sx={{
-                flex: 1, backgroundColor: '#fb6767',textAlign:'center',
+                backgroundColor: '#fb6767',textAlign:'center',
                 opacity: 0.8,boxShadow: 'inset 2px 2px 500px #fb6700',overflow: 'hidden',
             }}>
-                <img src="../ExcelWishmaster.png" alt="logo" style={{ position:'absolute',width:120,borderBottomRightRadius:'50%',boxShadow:'0px 0px 40px ',transform:'rotate(45deg)',top:280,left:'12%' }} />
+                <img src="../ExcelWishmaster.png" alt="logo" style={{ position:'absolute',width:110,borderBottomRightRadius:'50%',boxShadow:'0px 0px 40px ',transform:'rotate(45deg)',top:280,left:'6%' }} />
                 <Typography sx={{ color: 'whitesmoke', p:2,px: 8, mX:4,mt:1,display:'inline-block',fontSize: '20px',boxShadow:'2px 2px 100px red' }}>Wish Master</Typography>
             </Box>
-            <Box sx={{ flex: 1.96, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', flexDirection: 'column' }}>
+        </Hidden>
+            <Box sx={{ flex: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', flexDirection: 'column' }}>
               
-                <Box sx={{ width: '40%', display: 'flex', flexDirection: 'column', gap: 1.9 }}>
+                <Box sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: 1.9 }}>
                     <Typography variant='h5' sx={{ fontWeight: 750, fontSize: '24px' }}>Forgot Password?</Typography>
                     <Typography sx={{ fontSize: '14px', py: 1 }}>Enter the email address you used when you joined and we’ll send you instructions to reset your password.
                     </Typography>
