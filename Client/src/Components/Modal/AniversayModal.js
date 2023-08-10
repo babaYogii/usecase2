@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useMediaQuery } from '@mui/material';
 
 
 const style = {
@@ -15,15 +16,11 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-const flowerBackground = {
-  backgroundImage: `url('flower-image-url')`, // Replace 'flower-image-url' with the actual URL of your flower image
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-};
+
 
 export default function BasicWorkAniversaryModal({ open, handleClose, birthday }) {
 
-
+  const isSmallerScreen=useMediaQuery('(max-width: 600px)');
   
   const colorOptions = [
     'Surprise your friend with beautiful items in their favorite color that will make them smile',
@@ -86,7 +83,7 @@ export default function BasicWorkAniversaryModal({ open, handleClose, birthday }
         aria-describedby="modal-modal-description"
 
       >
-        <Box sx={{...style,...flowerBackground,}} className='modal-background'>
+        <Box sx={{...style,width: isSmallerScreen ? "75%" : "47%"}}>
           <Typography id="modal-modal-title" variant="h4" component="h2" sx={{fontSize:38,}}>
             Know More
           </Typography>

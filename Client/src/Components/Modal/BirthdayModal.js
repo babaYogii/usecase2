@@ -81,7 +81,7 @@ export default function BasicBirthdayModal({ open, handleClose, birthday }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{...style,width: isSmallerScreen ? "100%" : "47%"}}>
+        <Box sx={{...style,width: isSmallerScreen ? "75%" : "47%"}}>
           <Typography id="modal-modal-title" variant="h4" component="h2" sx={{fontSize:38,}}>
             Know More
           </Typography>
