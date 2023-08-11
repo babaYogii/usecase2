@@ -5,10 +5,15 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # Maximum number of new pods allowed during update
+      maxUnavailable: 1  # Maximum number of unavailable pods allowed during update
   template:
     metadata:
       labels:
@@ -42,10 +47,15 @@ kind: Deployment
 metadata:
   name: event-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: event
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # Maximum number of new pods allowed during update
+      maxUnavailable: 1  # Maximum number of unavailable pods allowed during update   
   template:
     metadata:
       labels:
@@ -78,10 +88,15 @@ kind: Deployment
 metadata:
   name: admin-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: admin
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # Maximum number of new pods allowed during update
+      maxUnavailable: 1  # Maximum number of unavailable pods allowed during update
   template:
     metadata:
       labels:
@@ -114,10 +129,15 @@ kind: Deployment
 metadata:
   name: authservice-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: authservice
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # Maximum number of new pods allowed during update
+      maxUnavailable: 1  # Maximum number of unavailable pods allowed during update
   template:
     metadata:
       labels:

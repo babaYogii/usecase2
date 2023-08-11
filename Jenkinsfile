@@ -103,7 +103,7 @@ pipeline {
     				// some block
 						}
 
-					sh "kubectl delete deployment frontend-deployment authservice-deployment admin-deployment event-deployment"
+					// sh "kubectl delete deployment frontend-deployment authservice-deployment admin-deployment event-deployment"
                 	sh "kubectl apply -f microservices.yaml"
 					// sh "kubectl rollout restart deployment frontend-deployment authservice-deployment admin-deployment event-deployment"
             	}
