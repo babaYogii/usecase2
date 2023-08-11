@@ -101,7 +101,8 @@ const LandingPage = () => {
                     sx={{ display: 'inline', color: '', textAlign: 'center', fontFamily: 'Rubik', mx: 1 }}
                 >
 
-                    XYZ
+                    xyz
+                    
                 </Typography>
                 to make them feel special.
             </Typography>
