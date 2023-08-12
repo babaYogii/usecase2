@@ -1,14 +1,15 @@
-import { Avatar, Box, Grid, InputAdornment, TextField } from '@mui/material';
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Input, InputAdornment, TextField } from '@mui/material';
 import React from 'react';
 import { getAllEmployee } from '../../api/adminApi';
 import { Card, IconButton, Typography } from '@mui/material';
-import { Delete, Search } from '@mui/icons-material';
+import { Delete, Search,Edit } from '@mui/icons-material';
+import axios from 'axios';
 import { DeleteEmployeeApi, searchEmployee } from '../../api/adminApi';
 
 const AllEmployee = ({ setAllemp, allemp }) => {
-
     const [searchQuery, setSearchQuery] = React.useState('');
-
+    const [editOpen,setEditOpen]=React.useState(false);
+    const [selectedEmployee, setSelectedEmployee] = React.useState(null);
 
     const fetchData = async () => {
         const response = await getAllEmployee();
@@ -51,6 +52,113 @@ const AllEmployee = ({ setAllemp, allemp }) => {
         setSearchQuery(value);
         searchEmp(value); // Call the searchEmp function whenever the value changes
     };
+// ---------------------------------------------------------------Edit component-------------------------------------------------------------
+
+
+const EditModal = ({ isOpen, onClose }) => {
+    let [newformData, setnewFormData] = React.useState({...selectedEmployee}); // State to manage form data
+    const [image,setImage]=React.useState(null)
+   console.log(newformData)
+  
+   
+        const handleFormSubmit = async (e) => {
+            e.preventDefault();
+        
+            try {
+              const formData = new FormData();
+              formData.append('employeename', newformData.employeename);
+              formData.append("employeeid",newformData.employeeid)
+              formData.append("profession",newformData.profession)
+              formData.append("placeofinterest",newformData.placeofinterest)
+              formData.append("favouritefood",newformData.favouritefood)
+              // Append other form data properties here
+        
+              if (image) {
+                formData.append('image', image);
+              }
+        
+              const response = await axios.put('/admin/update', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+        
+              console.log('Update successful:', response.data);
+              onClose(); // Close the modal after successful submission
+            } catch (error) {
+              console.error('Error updating:', error);
+              alert('An error occurred while updating.');
+            }
+        }
+    
+    
+  
+    return (
+        <Dialog open={isOpen} onClose={onClose}>
+        <DialogTitle>Edit Employee</DialogTitle>
+        <DialogContent>
+        {selectedEmployee!=null &&
+        <Box sx={{display:'flex',flexDirection:'column',gap:2}}>
+            <Typography >
+            {newformData.employeename}
+            </Typography>
+
+          <TextField
+            label="Favourite color"
+            name="employeeName"
+            value={newformData.favouriteColour}
+            onChange={(e) => setnewFormData({ ...newformData, favouriteColour: e.target.value })}
+            />
+
+          <TextField
+            label="Favourite Food"
+            name="favouritefood"
+            value={newformData.favouritefood}
+            onChange={(e) => setnewFormData({ ...newformData, favouritefood: e.target.value })}
+            />
+          <TextField
+            label="Favourite Place"
+            name="placeofinterest"
+            value={newformData.placeofinterest}
+            onChange={(e) => setnewFormData({ ...newformData, placeofinterest: e.target.value })}
+            />
+          <TextField
+            label="Current Role"
+            name="profession"
+            value={newformData.profession}
+            onChange={(e) => setnewFormData({ ...newformData, profession: e.target.value })}
+            />
+            <Input accept="image/*"
+            type="file"
+            inputProps={{ onChange: (event) => {
+                setImage(event.target.files[0]);} }}
+            />
+            {/* {console.log(image)} */}
+            </Box>
+       
+
+        }
+          {/* Add other form fields similarly */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={handleFormSubmit}>Save</Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+  
+
+
+
+
+
+
+
+
+
+
+
 
 
     return (
@@ -101,6 +209,12 @@ const AllEmployee = ({ setAllemp, allemp }) => {
                                 }}>
                                     <Delete sx={{ color: 'Amber.main' }} />
                                 </IconButton>
+                                <IconButton sx={{ position: 'absolute', right: 40, top: 8, }} onClick={() => {
+                               setSelectedEmployee(emp)
+                               setEditOpen(true);
+                               }}>
+                                    <Edit sx={{ color: 'Amber.main' }} />
+                                </IconButton>
                                 <Box className="upper-box" sx={{ p: 3, }}>
                                     <Avatar src={emp.profileimage} sx={{ width: 100, height: 100, border: '8px solid white', }} />
                                 </Box>
@@ -127,13 +241,13 @@ const AllEmployee = ({ setAllemp, allemp }) => {
                                             <Typography>:{(emp.employeeemail)}</Typography>
                                         </Box>
                                     </Box>
-
                                 </Box>
                             </Card>
                         </Grid>
                     ))}
                 </Grid>
             )}
+            <EditModal isOpen={editOpen} onClose={() => setEditOpen(false)} selectedEmployee />
         </Box>
     );
 };
