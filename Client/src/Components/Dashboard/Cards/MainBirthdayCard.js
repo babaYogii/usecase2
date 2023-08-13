@@ -35,7 +35,7 @@ const MainCard = ({ birthday, index }) => {
                 <CardMedia
                     component="img"
                     height="240"
-                    image={birthday.profileimage}
+                    image={birthday.profileimage ? birthday.profileimage :"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}
                     alt="Paella dish"
                     sx={{ objectFit: 'cover' }}
                 />
