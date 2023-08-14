@@ -4,3 +4,6 @@ https://itnext.io/react-express-node-js-and-mongodb-mern-stack-microservices-bas
 // change proxy in package.json to http://backend-service:4000
 try to build image and push it to container registry and run kubectl microservices.yaml
 also remove unwanted packages
+
+
+//Hii
