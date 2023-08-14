@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Input, InputAdornment, TextField } from '@mui/material';
-import React from 'react';
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Input, InputAdornment, InputLabel, TextField } from '@mui/material';
+import React, { useEffect } from 'react';
 import { getAllEmployee } from '../../api/adminApi';
 import { Card, IconButton, Typography } from '@mui/material';
 import { Delete, Search,Edit } from '@mui/icons-material';
@@ -58,12 +58,22 @@ const AllEmployee = ({ setAllemp, allemp }) => {
 const EditModal = ({ isOpen, onClose }) => {
     let [newformData, setnewFormData] = React.useState({...selectedEmployee}); // State to manage form data
     const [image,setImage]=React.useState(null)
-   console.log(newformData)
+    const [imageSizeExceeded,setImageSizeExceeded]=React.useState(false);
+    const imageSize=50000;
+
+    // if(image && image.size > fileSize){
+    //     console.log("File size exedded",image.size/1000)
+    // }else{
+    //     console.log("In limit",image && Math.round(image.size/1000))
+    // }
+    useEffect(()=>{},[image])
   
    
         const handleFormSubmit = async (e) => {
             e.preventDefault();
-        
+            // && !image.type.startsWith('image/')
+            console.log(image.size,imageSize)
+            if(image && image.size < imageSize && image.type.startsWith('image/')){
             try {
               const formData = new FormData();
               formData.append('employeename', newformData.employeename);
@@ -85,11 +95,15 @@ const EditModal = ({ isOpen, onClose }) => {
               });
         
               console.log('Update successful:', response.data);
+              alert("Updated successfully")
               onClose(); // Close the modal after successful submission
             } catch (error) {
               console.error('Error updating:', error);
               alert('An error occurred while updating.');
             }
+          }else{
+            setImageSizeExceeded(true);
+          }
         }
     
     
@@ -129,13 +143,18 @@ const EditModal = ({ isOpen, onClose }) => {
             value={newformData.profession}
             onChange={(e) => setnewFormData({ ...newformData, profession: e.target.value })}
             />
-            <Input accept="image/*"
+            <InputLabel>Choose profile image</InputLabel>
+            <Input accept="image/*" 
             type="file"
             inputProps={{ onChange: (event) => {
                 setImage(event.target.files[0]);} }}
-            />
-            {/* {console.log(image)} */}
-            </Box>
+            />{
+                imageSizeExceeded &&
+            <Typography variant='caption' color='red'>FileSize cannot be Greater than {Math.round(imageSize/1000)} kb Your file is {image && Math.round(image.size/100)}kb</Typography>
+        }{
+            (image && !image.type.startsWith('image/') )&&
+        <Typography variant='caption' color='red'>Select a proper image</Typography>
+         }   </Box>
        
 
         }
