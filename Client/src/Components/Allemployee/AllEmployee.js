@@ -73,7 +73,8 @@ const EditModal = ({ isOpen, onClose }) => {
             e.preventDefault();
             // && !image.type.startsWith('image/')
             console.log(image.size,imageSize)
-            if(image && image.size < imageSize && image.type.startsWith('image/')){
+            if(image && image.size < imageSize  ){
+                if(image.type.startsWith('image/'))
             try {
               const formData = new FormData();
               formData.append('employeename', newformData.employeename);
@@ -149,8 +150,10 @@ const EditModal = ({ isOpen, onClose }) => {
             inputProps={{ onChange: (event) => {
                 setImage(event.target.files[0]);} }}
             />{
-                imageSizeExceeded &&
+                imageSizeExceeded ?
             <Typography variant='caption' color='red'>FileSize cannot be Greater than {Math.round(imageSize/1000)} kb Your file is {image && Math.round(image.size/100)}kb</Typography>
+          :
+          <Typography variant='caption' color='green'>Good to Go Ahead</Typography>
         }{
             (image && !image.type.startsWith('image/') )&&
         <Typography variant='caption' color='red'>Select a proper image</Typography>
