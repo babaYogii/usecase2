@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const BaseUrl='http://localhost:4001'
+const BaseUrl="https://authservice-f6kq.onrender.com"
 // const Baseurl='http://20.204.43.67:4000'
 
 

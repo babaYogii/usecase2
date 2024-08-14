@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-
-const BaseUrl='http://localhost:4000'
+const BaseUrl="https://wishmaster.onrender.com"
 // const BaseUrl='http://20.204.43.67:4000'
 
 

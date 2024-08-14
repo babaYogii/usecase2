@@ -1,8 +1,7 @@
 
 import axios from 'axios'
-
 // const Baseurl='http://20.204.43.67:4000'
-const BaseUrl="http://localhost:4000"
+const BaseUrl="https://usecase2.onrender.com"
 
 
 
