@@ -1,11 +1,11 @@
-var apm = require('elastic-apm-node').start({
-    serviceName: 'Auth-service',
-    secretToken: '2RvuKXH7g2KNkGEoNq',
-    serverUrl: 'https://fedd99c6c2a9445a9235a41a897dc998.apm.us-central1.gcp.cloud.es.io:443',
-    environment: 'my-environment',
-    logLevel:'trace',
-    logging:'true'
-})
+// var apm = require('elastic-apm-node').start({
+//     serviceName: 'Auth-service',
+//     secretToken: '2RvuKXH7g2KNkGEoNq',
+//     serverUrl: 'https://fedd99c6c2a9445a9235a41a897dc998.apm.us-central1.gcp.cloud.es.io:443',
+//     environment: 'my-environment',
+//     logLevel:'trace',
+//     logging:'true'
+// })
 
   
   
@@ -19,7 +19,7 @@ const app=express();
 const cors=require('cors')
 const userRoute=require('./Router/userRoute');
 // const employeeRoute=require('./Router/employeeRoutes')
-app.use(apm.middleware.connect());
+// app.use(apm.middleware.connect());
 // const path=require('path')
 
 
@@ -31,7 +31,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/auth',userRoute)
 // app.use(employeeRoute)
-
+const port = process.env.PORT || 4001;
 
 connectDb();
 
@@ -48,5 +48,5 @@ connectDb();
 
 
 app.listen(4001,()=>{
-    console.log("Listening on port 4001")
+    console.log(`Listening on port ${port}`)
 })

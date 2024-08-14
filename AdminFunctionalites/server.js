@@ -1,11 +1,3 @@
-var apm = require('elastic-apm-node').start({
-    serviceName: 'Admin-service',
-    secretToken: '2RvuKXH7g2KNkGEoNq',
-    serverUrl: 'https://fedd99c6c2a9445a9235a41a897dc998.apm.us-central1.gcp.cloud.es.io:443',
-    environment: 'my-environment',
-    logLevel:'trace'
-})
-
 
 const express=require('express');
 const app=express();
@@ -15,7 +7,6 @@ const adminRoute=require('./Router/adminRoute');
 // const path=require('path')
 
 
-app.use(apm.middleware.connect());
 
 const connectDb = require('./connection');
 
